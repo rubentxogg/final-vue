@@ -1,20 +1,21 @@
 <template>
-<div class="d-flex flex-wrap justify-content-center">
-     <h1 class="text-center mt-4">La liga</h1>
-
-     <div class="p-5 mb-4 bg-light rounded-3">
-      <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Custom jumbotron</h1>
-        <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
-        <button class="btn btn-primary btn-lg" type="button">Example button</button>
-      </div>
-    </div>
+<div class="jumbotron text-center">
+      <img :src="logo" alt="laLigaLogo" class="img-fluid">
+        <h1 class="display-5 fw-bold">Temporada 2021-2022</h1>
+        <p class="col-md-8 fs-4 w-100">
+          Vive el fútbol, vive La Liga.
+        </p>
 </div>
 </template>
 
 <script>
 export default {
-    name: "Jumbotron"
+    name: "Jumbotron",
+    data() {
+      return {
+        logo: require('../assets/laliga.jpg'),
+      }
+    }
 }
 </script>
 
@@ -22,4 +23,6 @@ export default {
 h1{
     width: 100%;
 }
+
+
 </style>
