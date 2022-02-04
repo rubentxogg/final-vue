@@ -52,7 +52,6 @@ export default {
 
 <style scoped>
 nav{
-  height: 95vh;
   padding: 30px;
 }
 
