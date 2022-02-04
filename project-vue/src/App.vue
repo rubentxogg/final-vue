@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <menu-lateral class="col-2" />
-      <router-view class="col-10 d-flex justify-content-center flex-wrap align-items-center bg-light" />
+      <menu-lateral class="col-xxl-2 col-lg-3 col-md-4" />
+      <router-view class="col-xxl-10 col-lg-9 col-md-8 d-flex justify-content-center flex-wrap align-items-center bg-light" />
     </div>
 
     <div class="row">
