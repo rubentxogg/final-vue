@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <menu-lateral class="col-2" />
-      <router-view class="col-10 d-flex justify-content-center align-items-center bg-light" />
+      <router-view class="col-10 d-flex justify-content-center flex-wrap align-items-center bg-light" />
     </div>
 
     <div class="row">
