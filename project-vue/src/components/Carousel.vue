@@ -2,15 +2,24 @@
   <div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="../assets/oyar1.jpg" class="d-block w-100" alt="oyar">
+        <img :src="images[0]" class="d-block w-100 border border-light rounded-3" alt="oyar">
+        <div class="carousel-caption">
+          <h3 class="bg-dark bg-opacity-50">Entrega</h3>
+        </div>
       </div>
 
       <div class="carousel-item">
-        <img :src="images[1]" class="d-block w-100" alt="reala1">
+        <img :src="images[1]" class="d-block w-100 border border-light rounded-3" alt="reala1">
+        <div class="carousel-caption">
+          <h3 class="bg-dark bg-opacity-50">Pasión</h3>
+        </div>
       </div>
 
       <div class="carousel-item">
-        <img :src="images[2]" class="d-block w-100" alt="reala2">
+        <img :src="images[2]" class="d-block w-100 border border-light rounded-3" alt="reala2">
+        <div class="carousel-caption">
+          <h3 class="bg-dark bg-opacity-50">Conquista</h3>
+        </div>
       </div>
     </div>
 
@@ -32,9 +41,9 @@ export default {
   data() {
     return{
       images: [
-        '../assets/oyar1.jpg',
-        '../assets/reala.jpg',
-        '../assets/reala2.jpg'
+        require('../assets/oyar1.jpg'),
+        require('../assets/reala.jpg'),
+        require('../assets/reala2.jpg')
       ]
     }
   }
