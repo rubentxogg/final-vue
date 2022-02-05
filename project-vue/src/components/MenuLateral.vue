@@ -47,7 +47,7 @@
       </router-link>
 
       <span class="text-light text-center text-muted fs-5 mt-auto">
-        <hr /> <i class="bi bi-arrow-down-right-circle text-dark"></i> <a href="https://www.laliga.com/" class="link text-dark">LaLiga</a>
+        <hr /> <i class="bi bi-arrow-down-right-circle text-dark"></i> <a href="https://www.laliga.com/" class="link text-dark" target="_target">LaLiga</a>
       </span>
     </nav>
   </aside>
