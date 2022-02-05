@@ -14,7 +14,7 @@
         <tr v-for="(equipo, index) in equipos" :key="equipo.id">
           <td :class="asignarColorPosicion(index + 1)"></td>
           <th colspan="2">{{ index + 1 }}</th>
-          <td><img :src="escudos[equipo.id]" width="24" height="24" class="me-1 mb-1"/> {{ equipo.name }}</td>
+          <td><img :src="escudos[equipo.id]" width="24" height="24" class="me-1 mb-1" alt="escudo"/> {{ equipo.name }}</td>
           <td>{{ equipo.points }}</td>
         </tr>
       </tbody>
