@@ -3,7 +3,7 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th @click="ordenarEquiposPorPts">Pos</th>
+          <th>Pos</th>
           <th>Club</th>
           <th>Pts</th>
         </tr>
