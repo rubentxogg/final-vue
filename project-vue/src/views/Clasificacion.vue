@@ -4,25 +4,38 @@
     <h2 v-if="isLoading" class="text-center">Cargando...</h2>
 
     <div v-else-if="equipos.length < 1">
-      <h2 class="text-danger text-center mb-4">Oops! BDD no encontrada</h2>
+      <h2 class="text-dark text-center mb-4">Oops! Error al conectar con la BDD</h2>
       <img src="../assets/error.png" class="w-100 img-thumbnail rounded" alt="errorBDD"/>
     </div>
 
-    <tabla v-else :equipos="equipos" :escudos="escudos" />
+    <div v-else class="container ">
+      <div class="row d-flex justify-content-between flex-wrap align-items-center">
+        <div class="col-6">
+          <tabla-equipos :equipos="equipos" :escudos="escudos" @mostrarJugadores="filtrarJugadoresPorEquipo"/>
+        </div>
+
+         <div class="col-6">
+          <tabla-jugadores :jugadores="jugadoresPorEquipo"/>
+        </div>
+      </div>
+    </div>
+    
     <pie-pagina />
   </div>
 </template>
 
 <script>
-import Tabla from "@/components/Tabla.vue";
+import TablaEquipos from "@/components/TablaEquipos.vue";
+import TablaJugadores from "@/components/TablaJugadores.vue"
 import PiePagina from "@/components/PiePagina.vue";
 import axios from "axios";
 
 export default {
   name: "Clasificacion",
   components: {
-    Tabla,
-    PiePagina,
+    TablaEquipos,
+    TablaJugadores,
+    PiePagina
   },
   data() {
     return {
@@ -49,6 +62,8 @@ export default {
         require("../assets/escudos/atl.png"),
         require("../assets/escudos/sva.png"),
       ],
+      jugadores: [],
+      jugadoresPorEquipo: [],
       isLoading: false,
     };
   },
@@ -61,22 +76,40 @@ export default {
         .catch((error) => console.error(error))
         .finally(() => (this.isLoading = false));
     },
+    getJugadores(URL) {
+      this.isLoading = true;
+      axios
+        .get(URL)
+        .then((response) => (this.jugadores = response.data))
+        .catch((error) => console.error(error))
+    },
     ordenarEquiposPorPts() {
       this.equipos.sort((a, b) => b.points - a.points);
     },
+    filtrarJugadoresPorEquipo(equipo) {
+      this.jugadoresPorEquipo = [];
+      for(let jugador of this.jugadores) {
+        if(jugador.team === equipo) this.jugadoresPorEquipo.push(jugador);
+      }
+    },
+    ordenarJugadoresPorGoles() {
+      this.jugadoresPorEquipo.sort((a, b) => b.scores - a.scores);
+    }
   },
   mounted() {
-    this.getEquipos("http://localhost:3000/clubs/");
+    this.getEquipos("http://localhost:3000/clubs");
+    this.getJugadores("http://localhost:3000/players");
   },
   updated() {
     this.ordenarEquiposPorPts();
+    this.ordenarJugadoresPorGoles();
   },
 };
 </script>
 
 <style scoped>
-h1,
-h2 {
+h1, h2 {
   width: 100%;
 }
+
 </style>

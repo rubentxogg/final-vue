@@ -1,5 +1,5 @@
 <template>
-  <div class="tabla">
+  <div class="tabla-equipos border border-1 rounded">
     <table class="table table-hover table-striped">
       <thead>
         <tr>
@@ -14,7 +14,9 @@
         <tr v-for="(equipo, index) in equipos" :key="equipo.id">
           <td :class="asignarColorPosicion(index + 1)"></td>
           <th colspan="2">{{ index + 1 }}</th>
-          <td><img :src="escudos[equipo.id]" width="24" height="24" class="me-1 mb-1" alt="escudo"/> {{ equipo.name }}</td>
+          <td @click="mostrarJugadores(equipo.name)">
+            <img :src="escudos[equipo.id]" width="24" height="24" class="me-1 mb-1" alt="escudo"/> {{ equipo.name }}
+          </td>
           <td>{{ equipo.points }}</td>
         </tr>
       </tbody>
@@ -24,8 +26,9 @@
 
 <script>
 export default {
-  name: "Tabla",
+  name: "TablaEquipos",
   props: ["equipos", "escudos"],
+  events: ["mostrarJugadores"],
   data() {
     return {
       colorPosicion: {
@@ -41,13 +44,16 @@ export default {
       if(index > 0 && index < 5) return this.colorPosicion.champions;
       if(index > 4 && index < 7) return this.colorPosicion.uefa;
       return "";
+    },
+    mostrarJugadores(equipo) {
+      this.$emit("mostrarJugadores", equipo);
     }
   }
 };
 </script>
 
 <style scoped>
-.tabla {
-  width: 75%;
+td {
+  cursor: pointer;
 }
 </style>
