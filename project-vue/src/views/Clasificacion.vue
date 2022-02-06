@@ -1,33 +1,33 @@
 <template>
   <div class="clasificacion">
     <h1 class="text-center mt-4"><i class="bi bi-bar-chart-line m-3"></i>Clasificación</h1>
-    <hr class="w-75 mb-5">
+    <hr class="w-75 mb-5" />
     <h2 v-if="isLoading" class="text-center">Cargando...</h2>
 
     <div v-else-if="equipos.length < 1">
       <h2 class="text-dark text-center mb-4">Oops! Error al conectar con la BDD</h2>
-      <img src="../assets/error.png" class="w-100 img-thumbnail rounded" alt="errorBDD"/>
+      <img src="../assets/error.png" class="w-100 img-thumbnail rounded" alt="errorBDD" />
     </div>
 
-    <div v-else class="container ">
+    <div v-else class="container">
       <div class="row d-flex justify-content-between flex-wrap">
         <div class="col-6">
-          <tabla-equipos :equipos="equipos" :escudos="escudos" @mostrarJugadores="filtrarJugadoresPorEquipo"/>
+          <tabla-equipos :equipos="equipos" :escudos="escudos" @mostrarJugadores="getJugadores" />
         </div>
 
-         <div class="col-6">
-          <tabla-jugadores :jugadores="jugadoresPorEquipo"/>
+        <div class="col-6">
+          <tabla-jugadores :jugadores="jugadores" />
         </div>
       </div>
     </div>
-    
+
     <pie-pagina />
   </div>
 </template>
 
 <script>
 import TablaEquipos from "@/components/TablaEquipos.vue";
-import TablaJugadores from "@/components/TablaJugadores.vue"
+import TablaJugadores from "@/components/TablaJugadores.vue";
 import PiePagina from "@/components/PiePagina.vue";
 import axios from "axios";
 
@@ -36,7 +36,7 @@ export default {
   components: {
     TablaEquipos,
     TablaJugadores,
-    PiePagina
+    PiePagina,
   },
   data() {
     return {
@@ -64,7 +64,6 @@ export default {
         require("../assets/escudos/sva.png"),
       ],
       jugadores: [],
-      jugadoresPorEquipo: [],
       isLoading: false,
     };
   },
@@ -77,30 +76,29 @@ export default {
         .catch((error) => console.error(error))
         .finally(() => (this.isLoading = false));
     },
-    getJugadores(URL) {
-      this.isLoading = true;
-      axios
-        .get(URL)
-        .then((response) => (this.jugadores = response.data))
-        .catch((error) => console.error(error))
+    async getJugadores(equipo) {
+      this.jugadores = [];
+
+      try {
+        const response = await axios.get("http://localhost:3000/players", {
+          params: { team: equipo },
+        });
+        this.jugadores = response.data;
+        
+        if (this.jugadores.length < 1) window.alert(`No hay jugadores en ${equipo}`);
+      } catch (err) {
+        console.log(err);
+      }
     },
     ordenarEquiposPorPts() {
       this.equipos.sort((a, b) => b.points - a.points);
     },
-    filtrarJugadoresPorEquipo(equipo) {
-      this.jugadoresPorEquipo = [];
-      for(let jugador of this.jugadores) {
-        if(jugador.team === equipo) this.jugadoresPorEquipo.push(jugador);
-      }
-      if(this.jugadoresPorEquipo.length < 1) window.alert(`No existen jugadores en ${equipo}`);
-    },
     ordenarJugadoresPorGoles() {
-      this.jugadoresPorEquipo.sort((a, b) => b.scores - a.scores);
-    }
+      this.jugadores.sort((a, b) => b.scores - a.scores);
+    },
   },
   mounted() {
     this.getEquipos("http://localhost:3000/clubs");
-    this.getJugadores("http://localhost:3000/players");
   },
   updated() {
     this.ordenarEquiposPorPts();
@@ -110,7 +108,8 @@ export default {
 </script>
 
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   width: 100%;
 }
 </style>
