@@ -2,10 +2,21 @@
   <div class="jornadas d-flex align-self-start">
     <h1 class="text-center mt-4"><i class="bi bi-calendar-week m-3"></i>Jornadas</h1>
     <hr class="w-75 mb-auto" />
+
     <spinner v-if="isLoading" class="p-5"/>
     <h2 v-else-if="jornadas.lenth < 1" class="text-center">No hay jornadas para mostrar</h2>
-    <desplegable-jornadas v-else :jornadas="jornadas" @partidosJornada="partidosEnJornada" @mostrarJornadas="mostrarJornadas"/>
-    <jumbotron-partido jornada="Jornada 1" fecha="1995-04-23"/>
+    <desplegable-jornadas v-else :jornadas="jornadas" @partidosJornada="getPartidosEnJornada" @mostrarJornadas="mostrarJornadas"/>
+
+    <div v-for="partido in partidosJornadaFecha" :key="partido.id">
+      <jumbotron-partido 
+        :jornada="partido.round" 
+        :fecha="partido.date"
+        :equipo1="partido.team1"
+        :goles1="partido.score[0]"
+        :goles2="partido.score[1]"
+        :equipo2="partido.team2"/>
+    </div>
+    
   </div>
 </template>
 
@@ -27,8 +38,6 @@ export default {
       jornadas: [],
       partidosJornadaFecha: [],
       isLoading: false,
-      jornada: "",
-      fecha: "",
     }
   },
   methods: {
@@ -41,8 +50,14 @@ export default {
         .catch((error) => console.error(error))
         .finally(() => (this.isLoading = false));
     },
-    partidosEnJornada(jornada, fecha) {
-      console.log(`${jornada} - ${fecha}`);
+    getPartidosEnJornada(jornada, fecha) {
+      this.partidosJornadaFecha = [];
+      axios
+        .get('http://localhost:3000/matches', {
+          params: { round: jornada, date: fecha }
+        })
+        .then((response) => this.partidosJornadaFecha = response.data)
+        .catch((error) => console.error(error));
     },
     mostrarJornadas() {
      // TODO
