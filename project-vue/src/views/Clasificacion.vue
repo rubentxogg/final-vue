@@ -2,7 +2,7 @@
   <div class="clasificacion">
     <h1 class="text-center mt-4"><i class="bi bi-bar-chart-line m-3"></i>Clasificación</h1>
     <hr class="w-75 mb-5" />
-    <h2 v-if="isLoading" class="text-center">Cargando...</h2>
+    <spinner v-if="isLoading" />
 
     <div v-else-if="equipos.length < 1">
       <h2 class="text-dark text-center mb-4">Oops! Error al conectar con la BDD</h2>
@@ -29,6 +29,7 @@
 import TablaEquipos from "@/components/TablaEquipos.vue";
 import TablaJugadores from "@/components/TablaJugadores.vue";
 import PiePagina from "@/components/PiePagina.vue";
+import Spinner from "@/components/Spinner.vue"
 import axios from "axios";
 
 export default {
@@ -37,6 +38,7 @@ export default {
     TablaEquipos,
     TablaJugadores,
     PiePagina,
+    Spinner
   },
   data() {
     return {

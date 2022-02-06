@@ -1,6 +1,6 @@
 <template>
   <div class="inicio">
-    <jumbotron />
+    <jumbotron-inicio />
     <carousel />
     <pie-pagina />
   </div>
@@ -8,14 +8,14 @@
 
 <script>
 import Carousel from '@/components/Carousel.vue';
-import Jumbotron from '@/components/Jumbotron.vue';
+import JumbotronInicio from '@/components/JumbotronInicio.vue';
 import PiePagina from '@/components/PiePagina.vue';
 
 export default {
   name: "Inicio",
   components: {
     Carousel,
-    Jumbotron,
+    JumbotronInicio,
     PiePagina
   },
 };
