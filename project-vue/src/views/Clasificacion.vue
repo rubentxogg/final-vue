@@ -5,7 +5,7 @@
     <spinner v-if="isLoading" />
 
     <div v-else-if="equipos.length < 1">
-      <h2 class="text-dark text-center mb-4">Oops! Error al conectar con la BDD</h2>
+      <h2 class="text-dark text-center mb-4">Oops! Error al conectar con la BBDD</h2>
       <img src="../assets/error.png" class="w-100 img-thumbnail rounded" alt="errorBDD" />
     </div>
 
