@@ -17,7 +17,7 @@
       </tbody>
     </table>
     
-    <h2 v-else class="text-dark text-center">No hay jugadores en el equipo</h2>
+    <h2 v-else class="text-dark text-center">Haz click en un equipo</h2>
   </div>
 </template>
 

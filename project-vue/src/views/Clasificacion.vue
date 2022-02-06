@@ -1,6 +1,7 @@
 <template>
   <div class="clasificacion">
-    <h1 class="text-center m-5">Clasificación</h1>
+    <h1 class="text-center mt-4"><i class="bi bi-bar-chart-line m-3"></i>Clasificación</h1>
+    <hr class="w-75 mb-5">
     <h2 v-if="isLoading" class="text-center">Cargando...</h2>
 
     <div v-else-if="equipos.length < 1">
@@ -9,7 +10,7 @@
     </div>
 
     <div v-else class="container ">
-      <div class="row d-flex justify-content-between flex-wrap align-items-center">
+      <div class="row d-flex justify-content-between flex-wrap">
         <div class="col-6">
           <tabla-equipos :equipos="equipos" :escudos="escudos" @mostrarJugadores="filtrarJugadoresPorEquipo"/>
         </div>
@@ -91,6 +92,7 @@ export default {
       for(let jugador of this.jugadores) {
         if(jugador.team === equipo) this.jugadoresPorEquipo.push(jugador);
       }
+      if(this.jugadoresPorEquipo.length < 1) window.alert(`No existen jugadores en ${equipo}`);
     },
     ordenarJugadoresPorGoles() {
       this.jugadoresPorEquipo.sort((a, b) => b.scores - a.scores);
@@ -111,5 +113,4 @@ export default {
 h1, h2 {
   width: 100%;
 }
-
 </style>
