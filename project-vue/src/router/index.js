@@ -22,17 +22,17 @@ const routes = [
     component: () => import('../views/Jornadas.vue')
   },
   {
-    path: '/nuevojugador',
+    path: '/jugadores/nuevojugador',
     name: 'NuevoJugador',
     component: () => import('../views/NuevoJugador.vue')
   },
   {
-    path: '/eliminarjugador',
+    path: '/jugadores/eliminarjugador',
     name: 'EliminarJugador',
     component: () => import('../views/EliminarJugador.vue')
   },
   {
-    path: '/nuevopartido',
+    path: '/jornadas/nuevopartido',
     name: 'NuevoPartido',
     component: () => import('../views/NuevoPartido.vue')
   },

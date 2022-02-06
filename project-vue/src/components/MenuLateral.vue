@@ -21,7 +21,7 @@
         <span>Jornadas</span>
       </router-link>
 
-      <router-link to="/nuevopartido" class="ms-4 fs-8 rounded-pill p-1">
+      <router-link to="/jornadas/nuevopartido" class="ms-4 fs-8 rounded-pill p-1">
         <i class="bi bi-plus-circle m-3"></i>
         <span>Nuevo Partido</span>
       </router-link>
@@ -36,12 +36,12 @@
         <span>Jugadores</span>
       </router-link>
 
-      <router-link to="/nuevojugador" class="ms-4 fs-8 rounded-pill p-1">
+      <router-link to="/jugadores/nuevojugador" class="ms-4 fs-8 rounded-pill p-1">
         <i class="bi bi-person-plus m-3"></i>
         <span>Nuevo Jugador</span>
       </router-link>
 
-      <router-link to="/eliminarjugador" class="ms-4 fs-8 rounded-pill p-1">
+      <router-link to="/jugadores/eliminarjugador" class="ms-4 fs-8 rounded-pill p-1">
         <i class="bi bi-person-x m-3"></i>
         <span>Eliminar Jugador</span>
       </router-link>
