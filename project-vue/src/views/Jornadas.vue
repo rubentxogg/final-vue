@@ -9,12 +9,20 @@
 
     <div v-for="partido in partidosJornadaFecha" :key="partido.id">
       <jumbotron-partido 
+        v-if="partido.hasOwnProperty('score')"
         :jornada="partido.round" 
         :fecha="partido.date"
         :equipo1="partido.team1"
         :goles1="partido.score[0]"
         :goles2="partido.score[1]"
-        :equipo2="partido.team2"/>
+        :equipo2="partido.team2" />
+
+      <jumbotron-partido 
+        v-else
+        :jornada="partido.round" 
+        :fecha="partido.date"
+        :equipo1="partido.team1"
+        :equipo2="partido.team2" />
     </div>
     
   </div>
