@@ -24,7 +24,8 @@
         :fecha="partido.date"
         :equipo1="partido.team1"
         :equipo2="partido.team2"
-        :jugado="false" />
+        :jugado="false"
+        @puntuacionEquipos="puntuarEquipos"/>
     </div>
     
   </div>
@@ -69,8 +70,8 @@ export default {
         .then((response) => this.partidosJornadaFecha = response.data)
         .catch((error) => console.error(error));
     },
-    mostrarJornadas() {
-     // TODO
+    puntuarEquipos(equipo1, cont1, equipo2 ,cont2) {
+     console.log(`${equipo1}:${cont1} - ${equipo2} ${cont2}`);
     }
   },
   mounted() {
