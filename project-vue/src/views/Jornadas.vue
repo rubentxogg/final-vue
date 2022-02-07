@@ -71,7 +71,7 @@ export default {
         .catch((error) => console.error(error));
     },
     puntuarEquipos(equipo1, cont1, equipo2 ,cont2) {
-     console.log(`${equipo1}:${cont1} - ${equipo2} ${cont2}`);
+      console.log(equipo1,cont1, equipo2, cont2);
     }
   },
   mounted() {
