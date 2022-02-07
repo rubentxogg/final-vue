@@ -70,8 +70,42 @@ export default {
         .then((response) => this.partidosJornadaFecha = response.data)
         .catch((error) => console.error(error));
     },
-    puntuarEquipos(equipo1, cont1, equipo2 ,cont2) {
-      console.log(equipo1,cont1, equipo2, cont2);
+    async puntuarEquipos(equipo1, cont1, equipo2 ,cont2) {
+      let team1;
+      let team2;
+
+      team1 = await getEquipo(equipo1);
+      team2 = await getEquipo(equipo2);
+      
+      if(cont1 > cont2) puntuarVictoria(team1);
+      if(cont1 < cont2) puntuarVictoria(team2);
+      if(cont1 === cont2) {
+        puntuarEmpate(team1);
+        puntuarEmpate(team2);
+      }
+
+      function puntuarEmpate(equipo) {
+        return axios.put("http://localhost:3000/clubs/"+equipo.id, {
+          name: equipo.name,
+          id: equipo.id,
+          country: equipo.country,
+          points: equipo.points+1
+        });
+      }
+
+      function puntuarVictoria(equipo) {
+        return axios.put("http://localhost:3000/clubs/"+equipo.id, {
+          name: equipo.name,
+          id: equipo.id,
+          country: equipo.country,
+          points: equipo.points+3
+        });
+      }
+
+      async function getEquipo(team) {
+        return await axios.get('http://localhost:3000/clubs?name='+team.split().join("+"))
+          .then((response) => response.data[0]);
+      }
     }
   },
   mounted() {
