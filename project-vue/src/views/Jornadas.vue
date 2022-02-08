@@ -132,11 +132,17 @@ export default {
 
       actualizar;
       this.getPartidosEnJornada(jor[0].round, jor[0].date);
-    }
+    },
+    ordenarJornadas() {
+      this.jornadas.sort((a, b) => a.round.match(/\d+/)[0] - b.round.match(/\d+/)[0]); // Devuelve el primer número que encuentra
+    },
   },
   mounted() {
     this.getJornadas('http://localhost:3000/matches');
   },
+  updated() {
+    this.ordenarJornadas();
+  }
   
 };
 </script>
