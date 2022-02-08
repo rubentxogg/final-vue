@@ -10,6 +10,7 @@
     <div v-for="partido in partidosJornadaFecha" :key="partido.id">
       <jumbotron-partido 
         v-if="partido.hasOwnProperty('score')"
+        :escudos="escudos"
         :jornada="partido.round" 
         :fecha="partido.date"
         :equipo1="partido.team1"
@@ -20,6 +21,7 @@
 
       <jumbotron-partido 
         v-else
+        :escudos="escudos"
         :jornada="partido.round" 
         :fecha="partido.date"
         :equipo1="partido.team1"
@@ -44,6 +46,7 @@ export default {
     JumbotronPartido,
     Spinner
   },
+  props: ["escudos"],
   data() {
     return {
       jornadas: [],
@@ -103,7 +106,7 @@ export default {
         this.puntuarEmpate(team1);
         this.puntuarEmpate(team2);
       }
-    }
+    },
   },
   mounted() {
     this.getJornadas('http://localhost:3000/matches');

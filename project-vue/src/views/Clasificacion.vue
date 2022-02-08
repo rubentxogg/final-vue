@@ -40,31 +40,10 @@ export default {
     PiePagina,
     Spinner
   },
+  props: ["escudos"],
   data() {
     return {
       equipos: [],
-      escudos: [
-        require("../assets/escudos/eib.png"),
-        require("../assets/escudos/cta.png"),
-        require("../assets/escudos/gda.png"),
-        require("../assets/escudos/ath.png"),
-        require("../assets/escudos/cdz.png"),
-        require("../assets/escudos/osa.png"),
-        require("../assets/escudos/bcn.png"),
-        require("../assets/escudos/elch.png"),
-        require("../assets/escudos/rma.png"),
-        require("../assets/escudos/gtf.png"),
-        require("../assets/escudos/alv.png"),
-        require("../assets/escudos/bts.png"),
-        require("../assets/escudos/vlz.png"),
-        require("../assets/escudos/rso.png"),
-        require("../assets/escudos/vlr.png"),
-        require("../assets/escudos/hsc.png"),
-        require("../assets/escudos/vlc.png"),
-        require("../assets/escudos/lvt.png"),
-        require("../assets/escudos/atl.png"),
-        require("../assets/escudos/sva.png"),
-      ],
       jugadores: [],
       isLoading: false,
     };
