@@ -6,8 +6,10 @@
 
     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="#dropdownEquipo">
       <li v-for="equipo in equipos" :key="equipo.id" @click="seleccionarEquipo(equipo.name)">
-          <a class="dropdown-item">{{ equipo.name }}</a>
-          <hr class="dropdown-divider" />
+        <a class="dropdown-item">
+            <img :src="escudos[equipo.id]" width="24" height="24" class="me-1 mb-1" alt="-"/> {{ equipo.name }}
+        </a>
+        <hr class="dropdown-divider" />
       </li>
       
     </ul>
@@ -22,7 +24,7 @@ export default {
   methods: {
     seleccionarEquipo(equipo) {
       this.$emit("seleccionEquipo", equipo);
-    }
+    },
   }
 }
 </script>

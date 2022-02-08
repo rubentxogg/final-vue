@@ -9,12 +9,12 @@
     </p>
 
     <p class="d-flex">
-      <desplegable-equipos :equipos="equipos" @seleccionEquipo="seleccionarEquipo1"/>
+      <desplegable-equipos :escudos="escudos" :equipos="equipos" @seleccionEquipo="seleccionarEquipo1"/>
       <input class="text-center fs-5" type="text" name="jornada" readonly :value="equipo1"/>
     </p>
 
     <p class="d-flex">
-      <desplegable-equipos :equipos="equipos" @seleccionEquipo="seleccionarEquipo2"/>
+      <desplegable-equipos :escudos="escudos" :equipos="equipos" @seleccionEquipo="seleccionarEquipo2"/>
       <input class="text-center fs-5" type="text" name="jornada" readonly :value="equipo2"/>
     </p>
     
@@ -33,6 +33,7 @@ export default {
     DesplegableNuevaJornada,
     DesplegableEquipos
   },
+  props: ["escudos"],
   data() {
     return {
         jornadas: [],
