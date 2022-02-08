@@ -109,14 +109,21 @@ export default {
       }
     },
     async actualizarJornada(jornada, fecha, equipo1, contEquipo1, contEquipo2, equipo2) {
-      const jor = await axios.get('http://localhost:3000/matches?round='+jornada.split().join("+")+'&team1='+equipo1.split().join("+")+'&team2='+equipo2.split().join("+")+'&fecha='+fecha)
-          .then((response) => response.data[0]);
+      const jor = await axios.get('http://localhost:3000/matches', {
+        params: {
+          round: jornada,
+          team1: equipo1,
+          team2: equipo2,
+          date: fecha
+        } 
+      })
+      .then((response) => response.data);
       
-      const actualizar = await axios.put("http://localhost:3000/matches/"+jor.id, {
-          round: jor.round,
-          date: jor.date,
-          team1: jor.team1,
-          team2: jor.team2,
+      const actualizar = await axios.put("http://localhost:3000/matches/"+jor[0].id, {
+          round: jor[0].round,
+          date: jor[0].date,
+          team1: jor[0].team1,
+          team2: jor[0].team2,
           score: [
             contEquipo1,
             contEquipo2
@@ -124,7 +131,7 @@ export default {
         });
 
       actualizar;
-      this.getPartidosEnJornada(jor.round, jor.date);
+      this.getPartidosEnJornada(jor[0].round, jor[0].date);
     }
   },
   mounted() {
