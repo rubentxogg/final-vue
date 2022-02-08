@@ -27,6 +27,7 @@
         :equipo1="partido.team1"
         :equipo2="partido.team2"
         :jugado="false"
+        @actualizarJornada="actualizarJornada"
         @puntuacionEquipos="puntuarEquipos"/>
     </div>
     
@@ -107,6 +108,23 @@ export default {
         this.puntuarEmpate(team2);
       }
     },
+    async actualizarJornada(jornada, fecha, equipo1, contEquipo1, contEquipo2, equipo2) {
+      const jor = await axios.get('http://localhost:3000/matches?round='+jornada.split().join("+")+'&team1='+equipo1.split().join("+")+'&team2='+equipo2.split().join("+")+'&fecha='+fecha)
+          .then((response) => response.data[0]);
+      
+      const actualizar = await axios.put("http://localhost:3000/matches/"+jor.id, {
+          round: jor.round,
+          date: jor.date,
+          team1: jor.team1,
+          team2: jor.team2,
+          score: [
+            contEquipo1,
+            contEquipo2
+          ]
+        });
+
+      actualizar;
+    }
   },
   mounted() {
     this.getJornadas('http://localhost:3000/matches');

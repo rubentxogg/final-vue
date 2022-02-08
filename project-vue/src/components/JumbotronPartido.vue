@@ -14,7 +14,7 @@
       <input type="number" name="cont2" min="0" class="rounded" v-model="contEquipo2"> 
       {{ equipo2 }}
       <img :src="escudos[mostrarEscudo(equipo2)]" width="24" height="24" class="me-1 mb-1" alt="º"/>
-      <button type="button" class="btn btn-outline-success ms-2" :class="desactivarBoton" @click="puntuacionEquipos(equipo1, equipo2)">Guardar</button>
+      <button type="button" class="btn btn-outline-success ms-2" :class="desactivarBoton" @click="actualizarJornada(jornada, fecha, equipo1, contEquipo1, contEquipo2, equipo2); puntuacionEquipos(equipo1, equipo2)">Guardar</button>
     </p>
   </div>
 </template>
@@ -34,7 +34,7 @@ export default {
     "equipo2", 
     "jugado"
   ],
-  events: ["puntuacionEquipos"],
+  events: ["puntuacionEquipos", "actualizarJornada"],
   data() {
     return {
       contEquipo1: "",
@@ -60,6 +60,9 @@ export default {
       for(let i=0; i<this.equipos.length; i++) {
         if(this.equipos[i].name == equipo) return this.equipos[i].id;
       }
+    },
+    actualizarJornada(jornada, fecha, equipo1, contEquipo1, contEquipo2, equipo2) {
+      this.$emit("actualizarJornada", jornada, fecha, equipo1, contEquipo1, contEquipo2, equipo2);
     }
   },
   computed: {
