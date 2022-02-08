@@ -4,6 +4,7 @@
       <caption class="p-2 bg-dark text-light"><i class="bi bi-caret-right me-1"></i>{{ jugadores[0].team }}</caption>
       <thead>
         <tr>
+          <th><i class="bi bi-hash"></i></th>
           <th>Jugador</th>
           <th>Goles</th>
         </tr>
@@ -11,6 +12,7 @@
 
       <tbody>
         <tr v-for="jugador in jugadores" :key="jugador.id">
+          <td><i class="bi bi-person-circle"></i></td>
           <td>{{ jugador.name }}</td>
           <td>{{ jugador.scores }}</td>
         </tr>
