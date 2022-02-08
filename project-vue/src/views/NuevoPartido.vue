@@ -15,7 +15,7 @@ export default {
   props: ["escudos"],
   components : {
     FormularioPartido
-  }
+  },
 };
 </script>
 
