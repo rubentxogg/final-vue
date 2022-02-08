@@ -9,7 +9,6 @@
           <a class="dropdown-item">{{ jornada.round }}</a>
           <hr class="dropdown-divider" />
       </li>
-      
     </ul>
   </div>
 </template>

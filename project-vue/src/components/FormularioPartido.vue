@@ -19,14 +19,13 @@
     </p>
 
     <p class="d-flex">
-      <button class="btn btn-secondary ms-4" type="button">
+      <button class="btn btn-secondary ms-4 date" type="button">
         <i class="bi bi-clock-history"></i> Fecha&nbsp;&nbsp;&nbsp;
       </button>
       <input class="m-auto fs-5 text-center ms-5" type="date" name="fecha" v-model="fecha">
     </p>
 
     <button type="button" :class="desactivarBoton">Añadir</button>
-    
     </fieldset>
   </form>
 </template>
@@ -35,7 +34,6 @@
 import DesplegableNuevaJornada from "@/components/DesplegableNuevaJornada";
 import DesplegableEquipos from "@/components/DesplegableEquipos";
 import axios from 'axios';
-
 export default {
   name: "FormularioPartido",
   components: {
@@ -66,7 +64,6 @@ export default {
         .get(URL)
         .then((response) => (this.equipos = response.data))
         .catch((error) => console.error(error));
-
     },
     seleccionarJornada(jornada) {
       this.nombreJornada = jornada;
@@ -80,7 +77,7 @@ export default {
   },
   computed: {
     desactivarBoton() {
-      if(this.equipo1 === "" || this.equipo2 === "" || this.fecha === "" || this.nombreJornada === "") return "btn btn-lg mt-4 w-75 m-auto btn-danger disabled";
+      if(this.equipo1 === "" || this.equipo2 === "" || this.fecha === "" || this.nombreJornada === "" || this.equipo1 === this.equipo2) return "btn btn-lg mt-4 w-75 m-auto btn-danger disabled";
       return "btn btn-lg mt-4 w-75 m-auto btn-dark";
     }
   },
@@ -95,14 +92,17 @@ export default {
 li {
   cursor: pointer;
 }
-
 input{
   border: 0;
   border-bottom: 2px solid rgba(0, 0, 0, 0.705);
 }
-
 input[type="date"] {
   margin-left: 1rem;
   width: 250px;
+  cursor: pointer;
+}
+
+.date {
+  cursor: default;
 }
 </style>
