@@ -124,11 +124,13 @@ export default {
         });
 
       actualizar;
+      this.getPartidosEnJornada(jor.round, jor.date);
     }
   },
   mounted() {
     this.getJornadas('http://localhost:3000/matches');
   },
+  
 };
 </script>
 
