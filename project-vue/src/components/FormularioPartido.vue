@@ -25,7 +25,7 @@
       <input class="m-auto fs-5 text-center ms-5" type="date" name="fecha" v-model="fecha">
     </p>
 
-    <button type="button" :class="desactivarBoton">Añadir</button>
+    <button type="button" :class="desactivarBoton" @click="nuevoPartido(nombreJornada, equipo1, equipo2, fecha)">Añadir</button>
     </fieldset>
   </form>
 </template>
@@ -73,6 +73,16 @@ export default {
     },
     seleccionarEquipo2(equipo) {
       this.equipo2 = equipo;
+    },
+    nuevoPartido(nombreJornada, equipo1, equipo2, fecha) {
+      axios
+        .post("http://localhost:3000/matches", {
+          round: nombreJornada,
+          date: fecha,
+          team1: equipo1,
+          team2: equipo2
+        })
+        .then(window.alert("Partido añadido con éxito"), this.fecha = "", this.equipo1 = "", this.equipo2 = "", this.nombreJornada = "");
     }
   },
   computed: {
