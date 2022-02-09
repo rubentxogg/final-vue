@@ -5,24 +5,24 @@
 
     <p class="d-flex">
       <desplegable-nueva-jornada :jornadas="jornadas" @seleccionJornada="seleccionarJornada"/>
-      <input class="text-center fs-5" type="text" name="jornada" readonly :value="nombreJornada"/>
+      <input class="text-center fs-5 form-control" type="text" name="jornada" readonly :value="nombreJornada"/>
     </p>
 
     <p class="d-flex">
       <desplegable-equipos :escudos="escudos" :equipos="equipos" @seleccionEquipo="seleccionarEquipo1"/>
-      <input class="text-center fs-5" type="text" name="jornada" readonly :value="equipo1"/>
+      <input class="text-center fs-5 form-control" type="text" name="jornada" readonly :value="equipo1"/>
     </p>
 
     <p class="d-flex">
       <desplegable-equipos :escudos="escudos" :equipos="equipos" @seleccionEquipo="seleccionarEquipo2"/>
-      <input class="text-center fs-5" type="text" name="jornada" readonly :value="equipo2"/>
+      <input class="text-center fs-5 form-control" type="text" name="jornada" readonly :value="equipo2"/>
     </p>
 
     <p class="d-flex">
       <button class="btn btn-secondary ms-4 date" type="button">
         <i class="bi bi-clock-history"></i> Fecha&nbsp;&nbsp;&nbsp;
       </button>
-      <input class="m-auto fs-5 text-center ms-5" type="date" name="fecha" v-model="fecha">
+      <input class="m-auto fs-5 text-center ms-5 form-control" type="date" name="fecha" v-model="fecha">
     </p>
 
     <button type="button" :class="desactivarBoton" @click="nuevoPartido(nombreJornada, equipo1, equipo2, fecha)">Añadir</button>
