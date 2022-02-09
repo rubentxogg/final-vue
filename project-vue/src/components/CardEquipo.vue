@@ -10,8 +10,8 @@
         With supporting text below as a natural lead-in to additional content.
       </p>
       
-      <button class="btn btn-primary" @click="getJugadores(equipo.name)">Mostrar jugadores</button>
-      <tabla-jugadores class="mt-3" :jugadores="jugadores" v-if="jugadores.length > 0" />
+      <button class="btn btn-primary" @click="getJugadores(equipo.name)">{{ mostrarOcultarJugadores }}</button>
+      <tabla-jugadores class="mt-3" :jugadores="jugadores" v-if="jugadores.length > 0 & show" />
     </div>
 
     <div class="card-footer text-muted" >Vive el fútbol, vive La Liga</div>
@@ -45,11 +45,21 @@ export default {
         });
         this.jugadores = response.data;
         
-        if (this.jugadores.length < 1) window.alert(`No hay jugadores en ${equipo}`);
+        if (this.jugadores.length < 1) {
+          window.alert(`No hay jugadores en ${equipo}`);
+        } else {
+          this.show = !this.show;
+        }
       } catch (err) {
         console.log(err);
       }
     },
+  },
+  computed: {
+    mostrarOcultarJugadores() {
+      if(!this.show) return "Mostrar jugadores";
+      return "Ocultar jugadores";
+    }
   }
 };
 </script>
