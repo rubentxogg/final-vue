@@ -1,6 +1,6 @@
 <template>
   <div class="desplegable-nueva-jornada dropdown container">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownEquipo" data-bs-toggle="dropdown" aria-expanded="false">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownEquipo" data-bs-toggle="dropdown" aria-expanded="false">
          <i class="bi bi-diagram-3 me-1"></i> Equipos
     </button>
 

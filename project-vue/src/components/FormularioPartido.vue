@@ -1,9 +1,7 @@
 <template>
   <form class="formulario-partido mb-auto">
-    <fieldset class="border border-4 rounded p-5 pt-0 d-flex flex-wrap flex-column">
-      <legend class="text-muted text-center fs-4 mb-4 mt-2">Añadir partido</legend>
-
-    <p class="d-flex">
+    <fieldset class="border border-1 rounded p-5 pt-0 d-flex flex-wrap flex-column m-auto">
+    <p class="d-flex mt-5">
       <desplegable-nueva-jornada :jornadas="jornadas" @seleccionJornada="seleccionarJornada"/>
       <input class="text-center fs-5 form-control" type="text" name="jornada" readonly :value="nombreJornada"/>
     </p>
@@ -19,10 +17,10 @@
     </p>
 
     <p class="d-flex">
-      <button class="btn btn-secondary ms-4 date" type="button">
+      <button class="btn btn-outline-secondary ms-4 date" type="button">
         <i class="bi bi-clock-history"></i> Fecha&nbsp;&nbsp;&nbsp;
       </button>
-      <input class="m-auto fs-5 text-center ms-5 form-control" type="date" name="fecha" v-model="fecha">
+      <input class="m-auto fs-5 text-center ms-auto form-control" type="date" name="fecha" v-model="fecha">
     </p>
 
     <button type="button" :class="desactivarBoton" @click="nuevoPartido(nombreJornada, equipo1, equipo2, fecha)">Añadir</button>
@@ -38,7 +36,7 @@ export default {
   name: "FormularioPartido",
   components: {
     DesplegableNuevaJornada,
-    DesplegableEquipos
+    DesplegableEquipos,
   },
   props: ["escudos"],
   data() {
@@ -87,8 +85,8 @@ export default {
   },
   computed: {
     desactivarBoton() {
-      if(this.equipo1 === "" || this.equipo2 === "" || this.fecha === "" || this.nombreJornada === "" || this.equipo1 === this.equipo2) return "btn btn-lg mt-4 w-75 m-auto btn-danger disabled";
-      return "btn btn-lg mt-4 w-75 m-auto btn-dark";
+      if(this.equipo1 === "" || this.equipo2 === "" || this.fecha === "" || this.nombreJornada === "" || this.equipo1 === this.equipo2) return "btn btn-lg mt-4 w-75 m-auto btn-outline-danger disabled";
+      return "btn btn-lg mt-4 w-75 m-auto btn-outline-success";
     }
   },
   mounted() {
@@ -102,13 +100,10 @@ export default {
 li {
   cursor: pointer;
 }
-input{
-  border: 0;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.705);
-}
+
 input[type="date"] {
-  margin-left: 1rem;
-  width: 250px;
+  margin-left: 7rem !important;
+  width: 223px;
   cursor: pointer;
 }
 

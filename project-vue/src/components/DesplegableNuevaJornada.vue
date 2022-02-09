@@ -1,6 +1,6 @@
 <template>
   <div class="desplegable-nueva-jornada dropdown container">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownJornada" data-bs-toggle="dropdown" aria-expanded="false">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownJornada" data-bs-toggle="dropdown" aria-expanded="false">
       <i class="bi bi-calendar-week me-1"></i>Jornada
     </button>
 
