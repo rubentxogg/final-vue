@@ -11,7 +11,7 @@
     </div>
 
     <div v-else v-for="equipo in equipos" :key="equipo.id" class="m-4">
-      <card-equipo :escudos="escudos" :equipo="equipo" />
+      <card-equipo :escudos="escudos" :equipo="equipo"/>
     </div>
   </div>
 </template>
@@ -21,25 +21,27 @@ import CardEquipo from "@/components/CardEquipo.vue";
 import axios from "axios";
 
 export default {
-    name: "Equipos",
-    props: ["escudos"],
-    components: {
-      CardEquipo
-    },
-    data() {
-      return {
-        equipos: [],
-        isLoading: false
+  name: "Equipos",
+  props: ["escudos"],
+  components: {
+    CardEquipo,
+  },
+  data() {
+    return {
+      equipos: [],
+      jugadores: [],
+      isLoading: false,
+      show: false
       }
     },
     methods: {
       getEquipos(URL) {
-      this.isLoading = true;
-      axios
-        .get(URL)
-        .then((response) => (this.equipos = response.data))
-        .catch((error) => console.error(error))
-        .finally(() => (this.isLoading = false));
+        this.isLoading = true;
+        axios
+          .get(URL)
+          .then((response) => (this.equipos = response.data))
+          .catch((error) => console.error(error))
+          .finally(() => (this.isLoading = false));
       },
     },
     mounted() {

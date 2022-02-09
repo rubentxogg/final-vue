@@ -10,17 +10,47 @@
         With supporting text below as a natural lead-in to additional content.
       </p>
       
-      <button class="btn btn-primary">Mostrar jugadores</button>
+      <button class="btn btn-primary" @click="getJugadores(equipo.name)">Mostrar jugadores</button>
+      <tabla-jugadores class="mt-3" :jugadores="jugadores" v-if="jugadores.length > 0" />
     </div>
 
-    <div class="card-footer text-muted">Vive La Liga</div>
+    <div class="card-footer text-muted" >Vive el fútbol, vive La Liga</div>
   </div>
 </template>
 
 <script>
+import TablaJugadores from "@/components/TablaJugadores.vue";
+import axios from "axios";
+
 export default {
   name: "CardEquipo",
-  props: ["escudos", "equipo"]
+  props: ["escudos", "equipo"],
+  components: {
+    TablaJugadores
+  },
+  data() {
+    return {
+      show: false,
+      nombreEquipo: "",
+      jugadores: []
+    }
+  },
+  methods : {
+    async getJugadores(equipo) {
+      this.jugadores = [];
+
+      try {
+        const response = await axios.get("http://localhost:3000/players", {
+          params: { team: equipo },
+        });
+        this.jugadores = response.data;
+        
+        if (this.jugadores.length < 1) window.alert(`No hay jugadores en ${equipo}`);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  }
 };
 </script>
 
