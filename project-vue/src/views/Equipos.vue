@@ -1,9 +1,9 @@
 <template>
-  <div class="equipos">
+  <div class="equipos d-flex align-self-start">
     <h1 class="text-center mt-4 w-100"><i class="bi bi-diagram-3 m-3"></i>Equipos</h1>
-    <hr class="w-75 mb-5" />
+    <hr class="w-75 mb-auto" />
 
-    <spinner v-if="isLoading" />
+    <spinner class="p-5" v-if="isLoading" />
   
     <div v-else-if="equipos.length < 1">
       <h2 class="text-dark text-center mb-4 w-100">Oops! Error al conectar con la BBDD</h2>
@@ -18,6 +18,7 @@
 
 <script>
 import CardEquipo from "@/components/CardEquipo.vue";
+import Spinner from "@/components/Spinner.vue"
 import axios from "axios";
 
 export default {
@@ -25,6 +26,7 @@ export default {
   props: ["escudos"],
   components: {
     CardEquipo,
+    Spinner
   },
   data() {
     return {

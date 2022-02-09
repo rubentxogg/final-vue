@@ -1,5 +1,5 @@
 <template>
-  <div class="clasificacion">
+  <div class="clasificacion d-flex align-self-start">
     <h1 class="text-center mt-4"><i class="bi bi-bar-chart-line m-3"></i>Clasificación</h1>
     <hr class="w-75 mb-5" />
     <spinner v-if="isLoading" />

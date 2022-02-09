@@ -1,6 +1,5 @@
 <template>
-  <div class="tabla-equipos border border-1 rounded">
-    <table class="table table-hover table-striped">
+    <table class="tabla-equipos border border-1 rounded table table-hover table-striped">
       <thead>
         <tr>
           <th></th>
@@ -21,7 +20,6 @@
         </tr>
       </tbody>
     </table>
-  </div>
 </template>
 
 <script>

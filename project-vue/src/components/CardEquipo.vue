@@ -10,7 +10,7 @@
         With supporting text below as a natural lead-in to additional content.
       </p>
       
-      <button class="btn btn-primary" @click="getJugadores(equipo.name)">{{ mostrarOcultarJugadores }}</button>
+      <button class="btn btn-outline-secondary" @click="getJugadores(equipo.name)">{{ mostrarOcultarJugadores }}</button>
       <tabla-jugadores class="mt-3" :jugadores="jugadores" v-if="jugadores.length > 0 & show" />
     </div>
 

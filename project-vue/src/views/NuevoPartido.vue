@@ -1,5 +1,5 @@
 <template>
-  <div class="nuevo-partido">
+  <div class="nuevo-partido d-flex align-self-start">
     <h1 class="text-center mt-4"><i class="bi bi-plus-circle m-3"></i>Nuevo Partido</h1>
     <hr class="w-75 mb-5"/>
     

@@ -1,7 +1,6 @@
 <template>
-  <div class="tabla-jugadores border border-1 rounded">
-    <table v-if="jugadores.length > 0" class="table table-secondary table-hover table-striped text-center caption-top table-borderless">
-      <caption class="p-2 bg-dark text-light"><i class="bi bi-caret-right me-1"></i>{{ jugadores[0].team }}</caption>
+    <table v-if="jugadores.length > 0" class="tabla-jugadores table table-secondary table-hover table-striped text-center caption-top table-borderless">
+      <caption class="p-2 bg-dark border rounded text-light"><i class="bi bi-caret-right me-1"></i>{{ jugadores[0].team }}</caption>
       <thead>
         <tr>
           <th><i class="bi bi-hash"></i></th>
@@ -20,7 +19,6 @@
     </table>
     
     <h2 v-else class="text-dark text-center">Haz click en un equipo</h2>
-  </div>
 </template>
 
 <script>
