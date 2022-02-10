@@ -1,11 +1,13 @@
 <template>
   <form class="formulario-jugador">
-    <h1 class="mb-5">FORMULARIO JUGADOR</h1>
- 
-    <input type="text" name="nombre" placeholder="Nombre" class="form-control" />
-    <desplegable-equipos :equipos="equipos" :escudos="escudos"/>
-    <input type="number" name="goles" class="form-control" />
- 
+    <input type="text" name="nombre" placeholder="Nombre" class="form-control text-center fs-5" v-model="jugador" />
+
+    <desplegable-equipos :equipos="equipos" :escudos="escudos" @seleccionEquipo="seleccionarEquipo"/>
+    <input type="text" name="equipos" class="form-control text-center fs-5" :value="equipo" readonly>
+
+    <input type="number" name="goles" class="form-control text-center fs-5" v-model="goles"/>
+
+    <button type="button" :class="desactivarBoton">Añadir</button>
   </form>
 </template>
 
@@ -22,6 +24,9 @@ export default {
   data() {
     return {
       equipos: [],
+      equipo: "",
+      jugador: "",
+      goles: ""
     }
   },
   methods: {
@@ -32,6 +37,17 @@ export default {
         .then((response) => (this.equipos = response.data))
         .catch((error) => console.error(error))
         .finally(() => (this.isLoading = false));
+    },
+     seleccionarEquipo(equipo) {
+        this.equipo = equipo;
+    },
+  },
+  computed: {
+    desactivarBoton() {
+      let reg = /^\w+$/;
+
+      if(this.equipo === "" || this.jugador === "" || this.goles < 0 || !reg.test(this.goles)) return "btn btn-lg mt-4 w-75 m-auto btn-outline-danger disabled";
+      return "btn btn-lg mt-4 w-75 m-auto btn-outline-success";
     },
   },
    mounted() {
