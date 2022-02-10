@@ -12,6 +12,12 @@
       
       <button class="btn btn-outline-secondary" @click="getJugadores(equipo.name)">{{ mostrarOcultarJugadores }}</button>
       <tabla-jugadores class="mt-3" :jugadores="jugadores" v-if="jugadores.length > 0 & show" />
+
+      <button class="btn btn-outline-success mt-2" v-if="jugadores.length > 0 & show">
+        <i class="bi bi-person-plus m-1"></i>Nuevo jugador 
+      </button>
+
+      <formulario-jugador v-if="jugadores.length > 0 & show" :escudos="escudos"/> // TODO
     </div>
 
     <div class="card-footer text-muted" >Vive el fútbol, vive La Liga</div>
@@ -20,13 +26,15 @@
 
 <script>
 import TablaJugadores from "@/components/TablaJugadores.vue";
+import FormularioJugador from "@/components/FormularioJugador.vue";
 import axios from "axios";
 
 export default {
   name: "CardEquipo",
   props: ["escudos", "equipo"],
   components: {
-    TablaJugadores
+    TablaJugadores,
+    FormularioJugador
   },
   data() {
     return {

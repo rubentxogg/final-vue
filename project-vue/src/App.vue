@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
+    <div class="row bg-light">
       <menu-lateral class="col-xxl-2 col-lg-3 col-md-4 col-sm-5" />
       <router-view class="col-xxl-10 col-lg-9 col-md-8 col-sm-7 d-flex justify-content-center flex-wrap align-items-center bg-light" :escudos="escudos"/>
     </div>
@@ -46,6 +46,7 @@ export default {
     if (this.$route.name === "Clasificacion") { return this.escudos }
     if (this.$route.name === "NuevoPartido") { return this.escudos }
     if (this.$route.name === "Equipos") { return this.escudos }
+    if (this.$route.name === "NuevoJugador") { return this.escudos }
   }
 };
 </script>
