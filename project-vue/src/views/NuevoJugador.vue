@@ -5,7 +5,7 @@
     </h1>
     <hr class="w-75 mb-auto" />
 
-    <formulario-jugador :escudos="escudos"/>
+    <formulario-jugador :escudos="escudos" class="border border-1 rounded mt-5"/>
   </div>
 </template>
 
@@ -21,5 +21,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>

@@ -1,6 +1,6 @@
 <template>
     <table v-if="jugadores.length > 0" class="tabla-jugadores table table-secondary table-hover table-striped text-center caption-top table-borderless">
-      <caption class="p-2 bg-dark border rounded text-light"><i class="bi bi-caret-right me-1"></i>{{ jugadores[0].team }}</caption>
+      <caption class="p-2 bg-dark rounded text-light"><i class="bi bi-caret-right me-1"></i>{{ jugadores[0].team }}</caption>
       <thead>
         <tr>
           <th><i class="bi bi-hash"></i></th>

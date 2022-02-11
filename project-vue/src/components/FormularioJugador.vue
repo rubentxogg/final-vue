@@ -1,14 +1,23 @@
 <template>
   <form class="formulario-jugador">
-    <input type="text" name="nombre" placeholder="Nombre" class="form-control text-center fs-5" v-model="jugador" />
+     <fieldset class="p-5 pt-0 d-flex flex-wrap flex-column mt-1 g-1">
+      <p class="mt-5 d-flex justify-content-center">
+        <input type="text" name="nombre" placeholder="Nombre" class="form-control text-center fs-5" v-model="jugador" />
+      </p>
 
-    <desplegable-equipos :equipos="equipos" :escudos="escudos" @seleccionEquipo="seleccionarEquipo"/>
-    <input type="text" name="equipos" class="form-control text-center fs-5" :value="equipo" readonly>
+      <p class="d-flex align-self-center">
+        <desplegable-equipos :equipos="equipos" :escudos="escudos" @seleccionEquipo="seleccionarEquipo" class="d-flex"/>
+        <input type="text" name="equipos" class="form-control text-center fs-5" :value="equipo" readonly>
+      </p>
 
-    <input type="number" name="goles" class="form-control text-center fs-5" v-model="goles"/>
+      <p class="d-flex justify-content-center">
+        <input type="number" name="goles" placeholder="Goles" class="form-control text-center fs-5" v-model="goles"/>
+      </p>
 
-    <button type="button" :class="desactivarBoton">Añadir</button>
+      <button type="button" :class="desactivarBoton">Añadir</button>
+    </fieldset>
   </form>
+  
 </template>
 
 <script>
@@ -56,5 +65,6 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 </style>

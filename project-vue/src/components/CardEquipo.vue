@@ -17,7 +17,7 @@
         <i class="bi bi-person-plus m-1"></i>Nuevo jugador 
       </button>
 
-      <formulario-jugador v-if="jugadores.length > 0 & show" :escudos="escudos"/> // TODO
+      <formulario-jugador v-if="jugadores.length > 0 & show" :escudos="escudos" class="form-jugador"/>
     </div>
 
     <div class="card-footer text-muted" >Vive el fútbol, vive La Liga</div>
@@ -73,5 +73,7 @@ export default {
 </script>
 
 <style scoped>
-
+.form-jugador {
+  margin-top: -4rem;
+}
 </style>
