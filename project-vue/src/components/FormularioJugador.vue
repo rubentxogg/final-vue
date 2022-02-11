@@ -29,7 +29,7 @@ export default {
   components: {
     DesplegableEquipos,
   },
-  props: ["escudos"],
+  props: ["escudos", "nombreEquipo"],
   data() {
     return {
       equipos: [],
@@ -59,9 +59,9 @@ export default {
       return "btn btn-lg mt-4 w-75 m-auto btn-outline-success";
     },
   },
-   mounted() {
+  mounted() {
     this.getEquipos("http://localhost:3000/clubs");
-  }
+  },
 };
 </script>
 

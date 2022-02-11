@@ -11,13 +11,13 @@
       </p>
       
       <button class="btn btn-outline-secondary" @click="getJugadores(equipo.name)">{{ mostrarOcultarJugadores }}</button>
-      <tabla-jugadores class="mt-3" :jugadores="jugadores" v-if="jugadores.length > 0 & show" />
+      <tabla-jugadores class="mt-3" :jugadores="jugadores" v-if="jugadores.length > 0 & showJugadores" />
 
-      <button class="btn btn-outline-success mt-2" v-if="jugadores.length > 0 & show">
-        <i class="bi bi-person-plus m-1"></i>Nuevo jugador 
+      <button :class="botonNuevoJugador" @click="mostrarFormularioNuevoJugador">
+        <i class="bi bi-person-plus m-1"></i>{{ textoBotonFormularioNuevoJugador }}
       </button>
 
-      <formulario-jugador v-if="jugadores.length > 0 & show" :escudos="escudos" class="form-jugador"/>
+      <formulario-jugador v-if="showNuevoJugador" :escudos="escudos" class="form-jugador" :nombreEquipo="equipo.name"/> //TODO :nombreEquipo
     </div>
 
     <div class="card-footer text-muted" >Vive el fútbol, vive La Liga</div>
@@ -38,7 +38,8 @@ export default {
   },
   data() {
     return {
-      show: false,
+      showJugadores: false,
+      showNuevoJugador: false,
       nombreEquipo: "",
       jugadores: []
     }
@@ -56,17 +57,28 @@ export default {
         if (this.jugadores.length < 1) {
           window.alert(`No hay jugadores en ${equipo}`);
         } else {
-          this.show = !this.show;
+          this.showJugadores = !this.showJugadores;
         }
       } catch (err) {
         console.log(err);
       }
     },
+    mostrarFormularioNuevoJugador() {
+      this.showNuevoJugador = !this.showNuevoJugador;
+    }
   },
   computed: {
     mostrarOcultarJugadores() {
-      if(!this.show) return "Mostrar jugadores";
+      if(!this.showJugadores) return "Mostrar jugadores";
       return "Ocultar jugadores";
+    },
+    textoBotonFormularioNuevoJugador() {
+      if(!this.showNuevoJugador) return "Nuevo jugador";
+      return "Cancelar"
+    },
+    botonNuevoJugador() {
+      if(!this.showNuevoJugador) return "btn btn-outline-success mt-2";
+      return "btn btn-outline-warning mt-2"
     }
   }
 };
@@ -74,6 +86,6 @@ export default {
 
 <style scoped>
 .form-jugador {
-  margin-top: -4rem;
+  margin-top: -2rem;
 }
 </style>
