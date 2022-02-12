@@ -38,6 +38,7 @@ export default {
       goles: ""
     }
   },
+  events: ["actualizarTablaJugadores"],
   methods: {
     getEquipos(URL) {
       this.isLoading = true;
@@ -56,10 +57,14 @@ export default {
           name: jugador,
           team: equipo,
           scores: goles
+        })
+        .then(() => {
+          this.$emit("actualizarTablaJugadores", equipo);
+        })
+        .finally(() => {
+          this.jugador = "";
+          this.goles = "";
         });
-      
-      this.jugador = "";
-      this.goles = "";
     }
   },
   computed: {

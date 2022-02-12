@@ -17,7 +17,7 @@
         <i class="bi bi-person-plus m-1"></i>{{ textoBotonFormularioNuevoJugador }}
       </button>
 
-      <formulario-jugador v-if="showNuevoJugador" :escudos="escudos" class="form-jugador" :nombreEquipo="equipo.name" :isDisabled="true"/>
+      <formulario-jugador v-if="showNuevoJugador" :escudos="escudos" class="form-jugador" :nombreEquipo="equipo.name" :isDisabled="true" @actualizarTablaJugadores="actualizarTablaJugadores"/>
     </div>
 
     <div class="card-footer text-muted" >Vive el fútbol, vive La Liga</div>
@@ -48,23 +48,27 @@ export default {
     async getJugadores(equipo) {
       this.jugadores = [];
 
-      try {
-        const response = await axios.get("http://localhost:3000/players", {
-          params: { team: equipo },
-        });
+      await axios.get("http://localhost:3000/players", {
+        params: { team: equipo },
+      }).then((response) => {
         this.jugadores = response.data;
-        
-        if (this.jugadores.length < 1) {
-          window.alert(`No hay jugadores en ${equipo}`);
-        } else {
-          this.showJugadores = !this.showJugadores;
-        }
-      } catch (err) {
-        console.log(err);
-      }
+      }).then(() => {
+        this.comprobarJugadores(equipo);
+      });
     },
     mostrarFormularioNuevoJugador() {
       this.showNuevoJugador = !this.showNuevoJugador;
+    },
+    actualizarTablaJugadores(equipo) {
+      this.getJugadores(equipo);
+      this.showJugadores = !this.showJugadores;
+    },
+    comprobarJugadores(equipo) {
+      if(this.jugadores.length<1) {
+        window.alert(`No hay jugadores en ${equipo}`);
+      } else {
+        this.showJugadores= !this.showJugadores;
+      }
     }
   },
   computed: {
