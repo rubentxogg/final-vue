@@ -14,7 +14,7 @@
         <input type="number" name="goles" placeholder="Goles" class="form-control text-center fs-5" v-model="goles"/>
       </p>
 
-      <button type="button" :class="desactivarBoton">Añadir</button>
+      <button type="button" :class="desactivarBoton" @click="anadirJugador(jugador, equipo, goles)">Añadir</button>
     </fieldset>
   </form>
   
@@ -50,6 +50,17 @@ export default {
      seleccionarEquipo(equipo) {
         this.equipo = equipo;
     },
+    anadirJugador(jugador, equipo, goles) {
+      axios
+        .post("http://localhost:3000/players", {
+          name: jugador,
+          team: equipo,
+          scores: goles
+        });
+      
+      this.jugador = "";
+      this.goles = "";
+    }
   },
   computed: {
     desactivarBoton() {
