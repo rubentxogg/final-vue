@@ -47,6 +47,7 @@ export default {
     if (this.$route.name === "NuevoPartido") { return this.escudos }
     if (this.$route.name === "Equipos") { return this.escudos }
     if (this.$route.name === "NuevoJugador") { return this.escudos }
+    if (this.$route.name === "Jugadores") { return this.escudos }
   }
 };
 </script>
