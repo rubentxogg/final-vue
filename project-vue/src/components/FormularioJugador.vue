@@ -6,7 +6,7 @@
       </p>
 
       <p class="d-flex align-self-center">
-        <desplegable-equipos :equipos="equipos" :escudos="escudos" @seleccionEquipo="seleccionarEquipo" class="d-flex"/>
+        <desplegable-equipos :equipos="equipos" :escudos="escudos" @seleccionEquipo="seleccionarEquipo" class="d-flex" :isDisabled="isDisabled"/>
         <input type="text" name="equipos" class="form-control text-center fs-5" :value="equipo" readonly>
       </p>
 
@@ -29,7 +29,7 @@ export default {
   components: {
     DesplegableEquipos,
   },
-  props: ["escudos", "nombreEquipo"],
+  props: ["escudos", "nombreEquipo", "isDisabled"],
   data() {
     return {
       equipos: [],
@@ -61,6 +61,7 @@ export default {
   },
   mounted() {
     this.getEquipos("http://localhost:3000/clubs");
+    this.equipo = this.nombreEquipo;
   },
 };
 </script>

@@ -17,7 +17,7 @@
         <i class="bi bi-person-plus m-1"></i>{{ textoBotonFormularioNuevoJugador }}
       </button>
 
-      <formulario-jugador v-if="showNuevoJugador" :escudos="escudos" class="form-jugador" :nombreEquipo="equipo.name"/> //TODO :nombreEquipo
+      <formulario-jugador v-if="showNuevoJugador" :escudos="escudos" class="form-jugador" :nombreEquipo="equipo.name" :isDisabled="true"/>
     </div>
 
     <div class="card-footer text-muted" >Vive el fútbol, vive La Liga</div>

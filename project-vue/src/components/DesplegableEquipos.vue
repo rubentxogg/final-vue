@@ -1,6 +1,6 @@
 <template>
   <div class="desplegable-nueva-jornada dropdown container">
-    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownEquipo" data-bs-toggle="dropdown" aria-expanded="false">
+    <button :class="desactivarBoton" type="button" id="dropdownEquipo" data-bs-toggle="dropdown" aria-expanded="false">
          <i class="bi bi-diagram-3 me-1"></i> Equipos
     </button>
 
@@ -19,13 +19,20 @@
 <script>
 export default {
   name: "DesplegableNuevaJornada",
-  props: ["equipos", "escudos"],
+  props: ["equipos", "escudos", "isDisabled"],
   events: ["seleccionEquipo"],
   methods: {
     seleccionarEquipo(equipo) {
       this.$emit("seleccionEquipo", equipo);
     },
+  },
+  computed: {
+    desactivarBoton() {
+      if(this.isDisabled) return "btn btn-outline-secondary dropdown-toggle disabled";
+      return "btn btn-outline-secondary dropdown-toggle";
+    }
   }
+
 }
 </script>
 
