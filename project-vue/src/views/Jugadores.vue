@@ -10,13 +10,13 @@
     </div>
 
     <div v-else class="container">
-      <div class="row d-flex justify-content-between flex-wrap">
+      <div class="row">
         <div class="col-6">
-          <div v-for="equipo in equipos" :key="equipo.id" class="text-center">
-            <h2 @click="getJugadores(equipo.name)">
+          <div v-for="equipo in equipos" :key="equipo.id">
+            <h4 @click="getJugadores(equipo.name)">
               <img :src="escudos[equipo.id]" width="35" height="35" class="me-1 mb-1" alt="escudo"/> {{ equipo.name }}
-            </h2>
-            <hr>
+            </h4>
+            <hr class="w-75">
           </div>
         </div>
 
@@ -83,11 +83,11 @@ export default {
 </script>
 
 <style scoped>
-h2{
+h4{
   cursor: pointer;
 }
 
-h2:hover{
+h4:hover{
   color: red;
 }
 </style>
