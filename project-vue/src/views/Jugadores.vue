@@ -13,7 +13,7 @@
       <div class="row d-flex justify-content-between flex-wrap">
         <div class="col-6">
           <div v-for="equipo in equipos" :key="equipo.id" class="text-center">
-            <h2>
+            <h2 @click="getJugadores(equipo.name)">
               <img :src="escudos[equipo.id]" width="35" height="35" class="me-1 mb-1" alt="escudo"/> {{ equipo.name }}
             </h2>
             <hr>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="col-6">
-          // Jugadores
+          <accordion-jugador :jugadores="jugadores"/>
         </div>
       </div>
     </div>
@@ -33,19 +33,23 @@
 <script>
 import Spinner from "@/components/Spinner.vue";
 import PiePagina from "@/components/PiePagina.vue";
+import AccordionJugador from "@/components/AccordionJugador.vue"
 import axios from "axios";
+
 
 export default {
     name: "Jugadores",
     components: {
       Spinner,
-      PiePagina
+      PiePagina,
+      AccordionJugador
     },
     props: ["escudos"],
     data() {
       return {
         isLoading: false,
-        equipos: []
+        equipos: [],
+        jugadores: []
       }
     },
     methods: {
@@ -56,6 +60,20 @@ export default {
           .then((response) => (this.equipos = response.data))
           .catch((error) => console.error(error))
           .finally(() => (this.isLoading = false));
+      },
+      async getJugadores(equipo) {
+        this.jugadores = [];
+
+        try {
+          const response = await axios.get("http://localhost:3000/players", {
+            params: { team: equipo },
+          });
+          this.jugadores = response.data;
+
+          if (this.jugadores.length < 1) window.alert(`No hay jugadores en ${equipo}`);
+        } catch (err) {
+          console.log(err);
+        }
       },
     },
     mounted() {
