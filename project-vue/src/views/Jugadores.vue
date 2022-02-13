@@ -1,6 +1,6 @@
 <template>
   <div class="jugadores d-flex align-self-start">
-    <h1 class="text-center mt-4"><i class="bi bi-people m-3"></i>Jugadores</h1>
+    <h1 class="text-center mt-4 w-100"><i class="bi bi-people m-3"></i>Jugadores</h1>
     <hr class="w-75 mb-5" />
     <spinner v-if="isLoading" />
 
@@ -12,15 +12,25 @@
     <div v-else class="container">
       <div class="row">
         <div class="col-6">
+          <h2 class="text-center">
+            <i class="bi bi-diagram-3 m-3"></i>
+          </h2>
+          <hr>
+          
           <div v-for="equipo in equipos" :key="equipo.id">
-            <h4 @click="getJugadores(equipo.name)">
+             <h4 @click="getJugadores(equipo.name)">
               <img :src="escudos[equipo.id]" width="35" height="35" class="me-1 mb-1" alt="escudo"/> {{ equipo.name }}
-            </h4>
-            <hr class="w-75">
+             </h4>
+            <hr />
           </div>
         </div>
 
         <div class="col-6">
+          <h2 class="text-center">
+            <i class="bi bi-person"></i>
+          </h2>
+          <hr>
+
           <accordion-jugador :jugadores="jugadores" @eliminarJugador="eliminarJugador" @anadirGoles="anadirGoles"/>
         </div>
       </div>
@@ -49,7 +59,8 @@ export default {
       return {
         isLoading: false,
         equipos: [],
-        jugadores: []
+        jugadores: [],
+        isActive : false
       }
     },
     methods: {
@@ -87,6 +98,9 @@ export default {
           scores: jugador.scores + goles
         })
         .then(() => this.getJugadores(jugador.team));
+      },
+      equipoActivo() {
+        this.isActive = !this.isActive;
       }
     },
     mounted() {
