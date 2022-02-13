@@ -18,8 +18,9 @@
           <hr>
           
           <div v-for="equipo in equipos" :key="equipo.id">
-             <h4 @click="getJugadores(equipo.name)">
-              <img :src="escudos[equipo.id]" width="35" height="35" class="me-1 mb-1" alt="escudo"/> {{ equipo.name }}
+             <h4 @click="getJugadores(equipo.name); asignarEquipoActivo(equipo.name)" :class="{ isActive: equipoActivado(equipo.name) }">
+              <img :src="escudos[equipo.id]" width="35" height="35" class="me-1 mb-1" alt="escudo"/> {{ equipo.name }} 
+              <i v-if="equipoActivado(equipo.name)" class="bi bi-arrow-left-circle ms-1"></i>
              </h4>
             <hr />
           </div>
@@ -31,11 +32,12 @@
           </h2>
           <hr>
 
-          <accordion-jugador :jugadores="jugadores" @eliminarJugador="eliminarJugador" @anadirGoles="anadirGoles"/>
+          <accordion-jugador v-if="jugadores.length > 0" :jugadores="jugadores" @eliminarJugador="eliminarJugador" @anadirGoles="anadirGoles"/>
+          <h2 v-else class="text-center">No hay jugadores</h2>
         </div>
       </div>
     </div>
-
+    
     <pie-pagina />
   </div>
 </template>
@@ -60,7 +62,8 @@ export default {
         isLoading: false,
         equipos: [],
         jugadores: [],
-        isActive : false
+        isActive : false,
+        equipoActivo: "",
       }
     },
     methods: {
@@ -99,8 +102,12 @@ export default {
         })
         .then(() => this.getJugadores(jugador.team));
       },
-      equipoActivo() {
-        this.isActive = !this.isActive;
+      asignarEquipoActivo(equipo) {
+        this.equipoActivo = equipo;
+      },
+      equipoActivado(equipo) {
+        if(equipo === this.equipoActivo) return true;
+        return false;  
       }
     },
     mounted() {
@@ -115,6 +122,11 @@ h4{
 }
 
 h4:hover{
-  color: red;
+  opacity: 80%;
+}
+
+.isActive {
+text-align: center;
+transform: scale(1.3,1.3);
 }
 </style>
