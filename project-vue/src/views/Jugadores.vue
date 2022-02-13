@@ -21,7 +21,7 @@
         </div>
 
         <div class="col-6">
-          <accordion-jugador :jugadores="jugadores" @eliminarJugador="eliminarJugador"/>
+          <accordion-jugador :jugadores="jugadores" @eliminarJugador="eliminarJugador" @anadirGoles="anadirGoles"/>
         </div>
       </div>
     </div>
@@ -78,6 +78,15 @@ export default {
       eliminarJugador(jugador) {
         axios.delete("http://localhost:3000/players/"+jugador.id)
           .then(() => this.getJugadores(jugador.team));
+      },
+      anadirGoles(jugador, goles) {
+        axios.put("http://localhost:3000/players/"+jugador.id, {
+          id: jugador.id,
+          name: jugador.name,
+          team: jugador.team,
+          scores: jugador.scores + goles
+        })
+        .then(() => this.getJugadores(jugador.team));
       }
     },
     mounted() {

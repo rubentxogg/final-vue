@@ -36,7 +36,13 @@
           </div>
          
           <div class="row d-flex justify-content-evenly">
-            <button class="col-5">Hola</button>
+            <div class="col-5 d-flex">
+              <input type="number" v-model="goles" class=" me-1 form-control text-center fs-5" name="goles" placeholder="Goles"/>
+              <button :class="desactivarBoton" @click="anadirGoles(jugador, goles)">
+                <i class="bi bi-plus-circle fs-3"></i>
+              </button>
+            </div>
+            
             <button type="button" class="col-5 btn btn-outline-danger" @click="eliminarJugador(jugador)">
               <i class="bi bi-person-x me-1"></i> Eliminar jugador
             </button>
@@ -52,14 +58,31 @@
 <script>
 export default {
     name: "AccordionJugador",
+    data() {
+      return {
+        goles: ""
+      }
+    },
     props: ["jugadores"],
-    events: ["eliminarJugador"],
+    events: ["eliminarJugador", "anadirGoles"],
     methods: {
       jugadorUnico(jugador) {
         return jugador.name.replace(/\s/g, "")+jugador.id;
       },
       eliminarJugador(jugador) {
         this.$emit("eliminarJugador", jugador);
+      },
+      anadirGoles(jugador, goles) {
+        this.$emit("anadirGoles", jugador, goles);
+        this.goles = "";
+      }
+    },
+    computed: {
+      desactivarBoton() {
+        let reg = /^\w+$/;
+
+        if(this.goles < 0 || !reg.test(this.goles)) return "col-5 btn btn-outline-success disabled";
+        return "col-5 btn btn-outline-success";
       }
     }
 }
