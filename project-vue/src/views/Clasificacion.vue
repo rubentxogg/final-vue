@@ -12,11 +12,11 @@
     <div v-else class="container">
       <div class="row d-flex justify-content-between flex-wrap">
         <div class="col-6">
-          <tabla-equipos :equipos="equipos" :escudos="escudos" @mostrarJugadores="getJugadores" />
+          <tabla-equipos :equipos="equipos" :escudos="escudos" @mostrarJugadores="getJugadores"/>
         </div>
 
         <div class="col-6">
-          <tabla-jugadores :jugadores="jugadores" />
+          <tabla-jugadores :jugadores="jugadores" id="jugadores" />
         </div>
       </div>
     </div>
@@ -66,7 +66,11 @@ export default {
         });
         this.jugadores = response.data;
         
-        if (this.jugadores.length < 1) window.alert(`No hay jugadores en ${equipo}`);
+        if (this.jugadores.length < 1) {
+          window.alert(`No hay jugadores en ${equipo}`)
+        } else {
+          this.goto('jugadores');
+        }
       } catch (err) {
         console.log(err);
       }
@@ -77,6 +81,11 @@ export default {
     ordenarJugadoresPorGoles() {
       this.jugadores.sort((a, b) => b.scores - a.scores);
     },
+    goto(refName) { // Saltar a elemento
+       var element = this.$refs[refName];
+     
+       window.scrollTo(0, element);
+     }
   },
   mounted() {
     this.getEquipos("http://localhost:3000/clubs");
