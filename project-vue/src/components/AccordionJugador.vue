@@ -37,7 +37,9 @@
          
           <div class="row d-flex justify-content-evenly">
             <button class="col-5">Hola</button>
-            <button type="button" class="col-5 btn btn-outline-danger"><i class="bi bi-person-x me-1"></i> Eliminar jugador</button>
+            <button type="button" class="col-5 btn btn-outline-danger" @click="eliminarJugador(jugador)">
+              <i class="bi bi-person-x me-1"></i> Eliminar jugador
+            </button>
           </div>
         </div>
       </div>
@@ -51,9 +53,13 @@
 export default {
     name: "AccordionJugador",
     props: ["jugadores"],
+    events: ["eliminarJugador"],
     methods: {
       jugadorUnico(jugador) {
         return jugador.name.replace(/\s/g, "")+jugador.id;
+      },
+      eliminarJugador(jugador) {
+        this.$emit("eliminarJugador", jugador);
       }
     }
 }
