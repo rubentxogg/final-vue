@@ -69,9 +69,10 @@ export default {
   },
   computed: {
     desactivarBoton() {
-      let reg = /^\w+$/;
+      let regLetra = /^\w+$/;
+      let regNum = /\d+/;
 
-      if(this.equipo === "" || this.jugador === "" || this.goles < 0 || !reg.test(this.goles)) return "btn btn-lg mt-4 w-75 m-auto btn-outline-danger disabled";
+      if(this.equipo === undefined || this.jugador === "" || this.goles < 0 || !regLetra.test(this.goles) || regNum.test(this.jugador)) return "btn btn-lg mt-4 w-75 m-auto btn-outline-success disabled";
       return "btn btn-lg mt-4 w-75 m-auto btn-outline-success";
     },
   },
