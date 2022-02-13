@@ -12,13 +12,13 @@
     <div v-else class="container">
       <div class="row">
         <div class="col-6">
-          <h2 class="text-center">
+          <h2 class="text-center" id="jugadores">
             <i class="bi bi-diagram-3 m-3"></i>
           </h2>
           <hr>
           
           <div v-for="equipo in equipos" :key="equipo.id">
-             <h4 @click="getJugadores(equipo.name); asignarEquipoActivo(equipo.name)" :class="{ isActive: equipoActivado(equipo.name) }">
+             <h4 @click="getJugadores(equipo.name); asignarEquipoActivo(equipo.name); goto('jugadores')" :class="{ isActive: equipoActivado(equipo.name) }">
               <img :src="escudos[equipo.id]" width="35" height="35" class="me-1 mb-1" alt="escudo"/> {{ equipo.name }} 
               <i v-if="equipoActivado(equipo.name)" class="bi bi-arrow-left-circle ms-1"></i>
              </h4>
@@ -108,6 +108,11 @@ export default {
       equipoActivado(equipo) {
         if(equipo === this.equipoActivo) return true;
         return false;  
+      },
+      goto(refName) { // Saltar a elemento
+        var element = this.$refs[refName];
+      
+        window.scrollTo(0, element);
       }
     },
     mounted() {
