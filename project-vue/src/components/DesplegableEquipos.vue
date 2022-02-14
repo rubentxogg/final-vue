@@ -38,6 +38,6 @@ export default {
 
 <style scoped>
 li {
-    cursor: pointer;
+  cursor: pointer;
 }
 </style>
