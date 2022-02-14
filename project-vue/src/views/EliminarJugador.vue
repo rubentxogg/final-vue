@@ -19,7 +19,9 @@
 
        <button type="button" :class="desactivarBoton" @click="eliminarJugador">Eliminar</button>
       </fieldset>
-      </form>
+    </form>
+
+    <div class="hueco w-100"></div>
   </div>
 </template>
 
@@ -96,4 +98,7 @@ export default {
 </script>
 
 <style scoped>
+.hueco {
+  height: 15rem;
+}
 </style>
