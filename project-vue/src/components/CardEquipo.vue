@@ -15,7 +15,14 @@
         <i class="bi bi-person-plus m-1"></i>{{ textoBotonFormularioNuevoJugador }}
       </button>
 
-      <formulario-jugador v-if="showNuevoJugador" :escudos="escudos" class="form-jugador" :nombreEquipo="equipo.name" :isDisabled="true" @actualizarTablaJugadores="actualizarTablaJugadores"/>
+      <formulario-jugador 
+        v-if="showNuevoJugador" 
+        :escudos="escudos" 
+        class="form-jugador" 
+        :nombreEquipo="equipo.name" 
+        :isDisabled="true" 
+        @actualizarTablaJugadores="actualizarTablaJugadores"
+        @lanzarAlertaExito="lanzarAlertaExito"/>
     </div>
 
     <div class="card-footer text-muted" >Vive el fútbol, vive La Liga</div>
@@ -30,7 +37,7 @@ import axios from "axios";
 export default {
   name: "CardEquipo",
   props: ["escudos", "equipo"],
-  events: ["lanzarAlertaWarning"],
+  events: ["lanzarAlertaWarning", "lanzarAlertaExito"],
   components: {
     TablaJugadores,
     FormularioJugador,
@@ -97,6 +104,9 @@ export default {
     },
     fraseEquipo(equipo) {
       return this.frasesEquipo[equipo];
+    },
+    lanzarAlertaExito() {
+      this.$emit("lanzarAlertaExito");
     }
   },
   computed: {

@@ -3,6 +3,7 @@
     <h1 class="text-center mt-4 w-100"><i class="bi bi-diagram-3 m-3"></i>Equipos</h1>
     <hr class="w-75 mb-auto" />
     <alert-warning :mensaje="msg" v-if="showAlertaWarning" @cerrarWarning="cerrarAlertaWarning" id="alertaWarning"/>
+    <alert-exito :mensaje="msg" v-if="showAlertaExito" @cerrarExito="cerrarAlertaExito" id="alertaExito"/>
 
     <spinner class="p-5" v-if="isLoading" />
   
@@ -12,7 +13,7 @@
     </div>
 
     <div v-else v-for="equipo in equipos" :key="equipo.id" class="m-4">
-      <card-equipo :escudos="escudos" :equipo="equipo" @lanzarAlertaWarning="mostrarAlertaWarning"/>
+      <card-equipo :escudos="escudos" :equipo="equipo" @lanzarAlertaWarning="mostrarAlertaWarning" @lanzarAlertaExito="mostrarAlertaExito"/>
     </div>
   </div>
 </template>
@@ -21,6 +22,7 @@
 import CardEquipo from "@/components/CardEquipo.vue";
 import Spinner from "@/components/Spinner.vue"
 import AlertWarning from "@/components/AlertWarning.vue";
+import AlertExito from "@/components/AlertExito.vue";
 import axios from "axios";
 
 export default {
@@ -29,7 +31,8 @@ export default {
   components: {
     CardEquipo,
     Spinner,
-    AlertWarning
+    AlertWarning,
+    AlertExito
   },
   data() {
     return {
@@ -38,7 +41,8 @@ export default {
       isLoading: false,
       show: false,
       msg: "",
-      showAlertaWarning: false
+      showAlertaWarning: false,
+      showAlertaExito: false
       }
     },
     methods: {
@@ -57,6 +61,14 @@ export default {
       },
       cerrarAlertaWarning() {
         this.showAlertaWarning = false;
+      },
+      mostrarAlertaExito() {
+        this.showAlertaExito = true;
+        this.msg = "Jugador añadido con éxito";
+        this.goto("#alertaExito");
+      },
+      cerrarAlertaExito() {
+        this.showAlertaExito = false;
       },
       goto(refName) { // Saltar a elemento
        var element = this.$refs[refName];
