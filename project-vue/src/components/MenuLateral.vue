@@ -1,6 +1,6 @@
 <template>
   <aside class="meu-lateral">
-    <nav class="d-flex flex-column justify-content-start col-xxl-2 col-lg-3 col-md-4 col-sm-5 border-end border-3">
+    <nav class="d-flex flex-column justify-content-start border-end border-3">
       <h2 class="text-dark text-center mb-3">
         <i class="bi bi-justify me-3"></i>Menú
         <hr class="text-muted" />
@@ -68,6 +68,7 @@ aside {
 nav {
   padding: 30px;
   height: 100%;
+  width: 20rem;
   position: fixed;
   background-color: #f0f3f4;
 }
