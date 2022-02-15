@@ -1,7 +1,9 @@
 <template>
   <div class="clasificacion d-flex align-self-start">
     <h1 class="text-center mt-4"><i class="bi bi-bar-chart-line m-3"></i>Clasificación</h1>
-    <hr class="w-75 mb-5" />
+    <hr class="w-75 mb-1" />
+    <alert-warning :mensaje="msg" v-if="showAlertaWarning" @cerrarWarning="cerrarAlertaWarning" id="alertaWarning" class="mb-2"/>
+
     <spinner v-if="isLoading" />
 
     <div v-else-if="equipos.length < 1">
@@ -9,7 +11,7 @@
       <img src="../assets/error.png" class="w-100 img-thumbnail rounded" alt="errorBDD" />
     </div>
 
-    <div v-else class="container">
+    <div v-else class="container mt-5">
       <div class="row d-flex justify-content-between flex-wrap">
         <div class="col-6">
           <tabla-equipos :equipos="equipos" :escudos="escudos" @mostrarJugadores="getJugadores"/>
@@ -29,7 +31,8 @@
 import TablaEquipos from "@/components/TablaEquipos.vue";
 import TablaJugadores from "@/components/TablaJugadores.vue";
 import PiePagina from "@/components/PiePagina.vue";
-import Spinner from "@/components/Spinner.vue"
+import Spinner from "@/components/Spinner.vue";
+import AlertWarning from "@/components/AlertWarning.vue";
 import axios from "axios";
 
 export default {
@@ -38,7 +41,8 @@ export default {
     TablaEquipos,
     TablaJugadores,
     PiePagina,
-    Spinner
+    Spinner,
+    AlertWarning
   },
   props: ["escudos"],
   data() {
@@ -46,6 +50,8 @@ export default {
       equipos: [],
       jugadores: [],
       isLoading: false,
+      msg: "",
+      showAlertaWarning: false
     };
   },
   methods: {
@@ -67,7 +73,8 @@ export default {
         this.jugadores = response.data;
         
         if (this.jugadores.length < 1) {
-          window.alert(`No hay jugadores en ${equipo}`)
+          this.msg = `No hay jugadores en ${equipo}`;
+          this.mostrarAlertaWarning();
         } else {
           this.goto('jugadores');
         }
@@ -82,10 +89,17 @@ export default {
       this.jugadores.sort((a, b) => b.scores - a.scores);
     },
     goto(refName) { // Saltar a elemento
-       var element = this.$refs[refName];
+      var element = this.$refs[refName];
      
-       window.scrollTo(0, element);
-    }
+      window.scrollTo(0, element);
+    },
+    mostrarAlertaWarning() {
+      this.showAlertaWarning = true;
+      this.goto("#alertaWarning");
+    },
+    cerrarAlertaWarning() {
+      this.showAlertaWarning = false;
+    },
   },
   mounted() {
     this.getEquipos("http://localhost:3000/clubs");
