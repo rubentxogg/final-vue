@@ -3,7 +3,7 @@
     <h1 class="text-center mt-4 w-100"><i class="bi bi-diagram-3 m-3"></i>Equipos</h1>
     <hr class="w-75 mb-auto" />
     <alert-warning :mensaje="msg" v-if="showAlertaWarning" @cerrarWarning="cerrarAlertaWarning" id="alertaWarning"/>
-    <alert-exito :mensaje="msg" v-if="showAlertaExito" @cerrarExito="cerrarAlertaExito" id="alertaExito"/>
+    <alert-exito :mensaje="msg" v-if="showAlertaExito" @cerrarExito="cerrarAlertaExito" id="alertaExito" class="mt-5"/>
 
     <spinner class="p-5" v-if="isLoading" />
   

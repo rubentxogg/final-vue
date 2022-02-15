@@ -39,6 +39,7 @@ export default {
     DesplegableEquipos,
   },
   props: ["escudos"],
+  events: ["lanzarAlertaExito"],
   data() {
     return {
         jornadas: [],
@@ -80,7 +81,7 @@ export default {
           team1: equipo1,
           team2: equipo2
         })
-        .then(window.alert("Partido añadido con éxito"), this.fecha = "", this.equipo1 = "", this.equipo2 = "", this.nombreJornada = "");
+        .then(this.$emit("lanzarAlertaExito"), this.fecha = "", this.equipo1 = "", this.equipo2 = "", this.nombreJornada = "");
     }
   },
   computed: {
