@@ -85,7 +85,7 @@ export default {
        var element = this.$refs[refName];
      
        window.scrollTo(0, element);
-     }
+    }
   },
   mounted() {
     this.getEquipos("http://localhost:3000/clubs");

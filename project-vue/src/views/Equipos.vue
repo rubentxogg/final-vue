@@ -2,7 +2,7 @@
   <div class="equipos d-flex align-self-start">
     <h1 class="text-center mt-4 w-100"><i class="bi bi-diagram-3 m-3"></i>Equipos</h1>
     <hr class="w-75 mb-auto" />
-    <alert-warning :mensaje="msg" v-if="showAlertaWarning" @cerrarWarning="cerrarAlertaWarning"/>
+    <alert-warning :mensaje="msg" v-if="showAlertaWarning" @cerrarWarning="cerrarAlertaWarning" id="alertaWarning"/>
 
     <spinner class="p-5" v-if="isLoading" />
   
@@ -53,9 +53,15 @@ export default {
       mostrarAlertaWarning(msg) {
         this.showAlertaWarning = true;
         this.msg = msg;
+        this.goto("#alertaWarning");
       },
       cerrarAlertaWarning() {
         this.showAlertaWarning = false;
+      },
+      goto(refName) { // Saltar a elemento
+       var element = this.$refs[refName];
+     
+       window.scrollTo(0, element);
       }
     },
     mounted() {
