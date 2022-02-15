@@ -99,6 +99,6 @@ export default {
 
 <style scoped>
 .hueco {
-  height: 15rem;
+  height: 45rem;
 }
 </style>

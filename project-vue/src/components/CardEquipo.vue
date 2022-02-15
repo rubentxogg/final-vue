@@ -30,9 +30,10 @@ import axios from "axios";
 export default {
   name: "CardEquipo",
   props: ["escudos", "equipo"],
+  events: ["lanzarAlertaWarning"],
   components: {
     TablaJugadores,
-    FormularioJugador
+    FormularioJugador,
   },
   data() {
     return {
@@ -61,7 +62,8 @@ export default {
         "Tu nombre, mi ideal",
         "Nunca dejes de creer",
         "Dicen que nunca se rinde"
-      ]
+      ],
+      msg: ""
     }
   },
   methods : {
@@ -84,8 +86,11 @@ export default {
       this.showJugadores = !this.showJugadores;
     },
     comprobarJugadores(equipo) {
+      this.mostrarAlertaWarning = false;
+
       if(this.jugadores.length<1) {
-        window.alert(`No hay jugadores en ${equipo}`);
+        this.msg = `No hay jugadores en ${equipo}`;
+        this.$emit("lanzarAlertaWarning", this.msg);
       } else {
         this.showJugadores= !this.showJugadores;
       }
