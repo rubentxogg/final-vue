@@ -117,7 +117,12 @@ export default {
           team: jugador.team,
           scores: jugador.scores + goles
         })
-        .then(() => this.getJugadores(jugador.team));
+        .then(() => this.getJugadores(jugador.team))
+        .then(() => {
+          this.showAlertaExito = true;
+          this.msgExito = "Goles añadidos con éxito";
+          this.goto("#alertaExito");
+        });
       },
       asignarEquipoActivo(equipo) {
         this.equipoActivo = equipo;
