@@ -2,7 +2,8 @@
   <div class="jugadores d-flex align-self-start">
     <h1 class="text-center mt-4 w-100"><i class="bi bi-people m-3"></i>Jugadores</h1>
     <hr class="w-75" />
-    <alert-warning :mensaje="msg" v-if="showAlertaWarning" @cerrarWarning="cerrarAlertaWarning" id="alertaWarning"/>
+    <alert-warning :mensaje="msgWarn" v-if="showAlertaWarning" @cerrarWarning="cerrarAlertaWarning" id="alertaWarning"/>
+    <alert-exito :mensaje="msgExito" v-if="showAlertaExito" @cerrarExito="cerrarAlertaExito" id="alertaExito" />
 
     <spinner v-if="isLoading" />
 
@@ -45,6 +46,7 @@
 </template>
 
 <script>
+import AlertExito from "@/components/AlertExito.vue";
 import Spinner from "@/components/Spinner.vue";
 import PiePagina from "@/components/PiePagina.vue";
 import AccordionJugador from "@/components/AccordionJugador.vue";
@@ -58,7 +60,8 @@ export default {
       Spinner,
       PiePagina,
       AccordionJugador,
-      AlertWarning
+      AlertWarning,
+      AlertExito
     },
     props: ["escudos"],
     data() {
@@ -69,7 +72,9 @@ export default {
         isActive : false,
         equipoActivo: "",
         showAlertaWarning: false,
-        msg: ""
+        showAlertaExito: false,
+        msgWarn: "",
+        msgExito: ""
       }
     },
     methods: {
@@ -91,7 +96,7 @@ export default {
           this.jugadores = response.data;
 
           if (this.jugadores.length < 1) {
-            this.msg = `No hay jugadores en ${equipo}`;
+            this.msgWarn = `No hay jugadores en ${equipo}`;
             this.mostrarAlertaWarning();
           }
         } catch (err) {
@@ -100,7 +105,10 @@ export default {
       },
       eliminarJugador(jugador) {
         axios.delete("http://localhost:3000/players/"+jugador.id)
-          .then(() => this.getJugadores(jugador.team));
+          .then(() => this.getJugadores(jugador.team))
+          .then(() => {
+            this.mostrarAlertaExito();
+          });
       },
       anadirGoles(jugador, goles) {
         axios.put("http://localhost:3000/players/"+jugador.id, {
@@ -129,6 +137,14 @@ export default {
       },
       cerrarAlertaWarning() {
         this.showAlertaWarning = false;
+      },
+      mostrarAlertaExito() {
+        this.showAlertaExito = true;
+        this.msgExito = "Jugador eliminado con éxito";
+        this.goto("#alertaExito");
+      },
+      cerrarAlertaExito() {
+        this.showAlertaExito = false;
       },
     },
     mounted() {
