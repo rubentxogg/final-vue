@@ -4,6 +4,7 @@
        <i class="bi bi-person-x m-3"></i> Eliminar Jugador
     </h1>
     <hr class="w-75 mb-auto" />
+    <alert-exito :mensaje="msg" v-if="showAlertaExito" @cerrarExito="cerrarAlertaExito" id="alertaExito" class="mt-5"/>
 
     <form class="mb-auto mt-5">
       <fieldset class="border border-1 rounded p-5 pt-0 d-flex flex-wrap flex-column">
@@ -28,6 +29,7 @@
 <script>
 import DesplegableEquipos from "@/components/DesplegableEquipos.vue";
 import DesplegableJugadores from "@/components/DesplegableJugadores.vue";
+import AlertExito from "@/components/AlertExito.vue";
 import axios from "axios";
 
 export default {
@@ -39,11 +41,14 @@ export default {
         jugadores: [],
         equipo: "",
         jugador: "",
+        showAlertaExito: false,
+        msg: ""
       }
     },
     components: {
       DesplegableEquipos,
-      DesplegableJugadores
+      DesplegableJugadores,
+      AlertExito
     },
     methods: {
       getEquipos(URL) {
@@ -78,7 +83,21 @@ export default {
           .then(() => {
             this.jugador = "",
             this.equipo = ""
+            this.mostrarAlertaExito();
           });
+      },
+      mostrarAlertaExito() {
+        this.showAlertaExito = true;
+        this.msg = "Jugador eliminado con éxito";
+        this.goto("#alertaExito");
+      },
+      cerrarAlertaExito() {
+        this.showAlertaExito = false;
+      },
+      goto(refName) { // Saltar a elemento
+       var element = this.$refs[refName];
+
+       window.scrollTo(0, element);
       }
     },
     computed: {
