@@ -1,7 +1,9 @@
 <template>
   <div class="jugadores d-flex align-self-start">
     <h1 class="text-center mt-4 w-100"><i class="bi bi-people m-3"></i>Jugadores</h1>
-    <hr class="w-75 mb-5" />
+    <hr class="w-75" />
+    <alert-warning :mensaje="msg" v-if="showAlertaWarning" @cerrarWarning="cerrarAlertaWarning" id="alertaWarning"/>
+
     <spinner v-if="isLoading" />
 
     <div v-else-if="equipos.length < 1">
@@ -9,7 +11,7 @@
       <img src="../assets/error.png" class="w-100 img-thumbnail rounded" alt="errorBDD" />
     </div>
 
-    <div v-else class="container">
+    <div v-else class="container mt-5">
       <div class="row">
         <div class="col-6">
           <h2 class="text-center" id="jugadores">
@@ -33,7 +35,7 @@
           <hr>
 
           <accordion-jugador v-if="jugadores.length > 0" :jugadores="jugadores" @eliminarJugador="eliminarJugador" @anadirGoles="anadirGoles"/>
-          <h2 v-else class="text-center">No hay jugadores</h2>
+          <h2 v-else class="text-center">Haz click en un equipo</h2>
         </div>
       </div>
     </div>
@@ -45,7 +47,8 @@
 <script>
 import Spinner from "@/components/Spinner.vue";
 import PiePagina from "@/components/PiePagina.vue";
-import AccordionJugador from "@/components/AccordionJugador.vue"
+import AccordionJugador from "@/components/AccordionJugador.vue";
+import AlertWarning from "@/components/AlertWarning.vue";
 import axios from "axios";
 
 
@@ -54,7 +57,8 @@ export default {
     components: {
       Spinner,
       PiePagina,
-      AccordionJugador
+      AccordionJugador,
+      AlertWarning
     },
     props: ["escudos"],
     data() {
@@ -64,6 +68,8 @@ export default {
         jugadores: [],
         isActive : false,
         equipoActivo: "",
+        showAlertaWarning: false,
+        msg: ""
       }
     },
     methods: {
@@ -84,7 +90,10 @@ export default {
           });
           this.jugadores = response.data;
 
-          if (this.jugadores.length < 1) window.alert(`No hay jugadores en ${equipo}`);
+          if (this.jugadores.length < 1) {
+            this.msg = `No hay jugadores en ${equipo}`;
+            this.mostrarAlertaWarning();
+          }
         } catch (err) {
           console.log(err);
         }
@@ -113,7 +122,14 @@ export default {
         var element = this.$refs[refName];
       
         window.scrollTo(0, element);
-      }
+      },
+      mostrarAlertaWarning() {
+        this.showAlertaWarning = true;
+        this.goto("#alertaWarning");
+      },
+      cerrarAlertaWarning() {
+        this.showAlertaWarning = false;
+      },
     },
     mounted() {
       this.getEquipos("http://localhost:3000/clubs");
