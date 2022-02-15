@@ -5,6 +5,7 @@
     </h1>
     <hr class="w-75 mb-auto" />
     <alert-exito :mensaje="msg" v-if="showAlertaExito" @cerrarExito="cerrarAlertaExito" id="alertaExito" class="mt-5"/>
+    <alert-warning :mensaje="msg" v-if="showAlertaWarning" @cerrarWarning="cerrarAlertaWarning" id="alertaWarning" class="mt-5"/>
 
     <form class="mb-auto mt-5">
       <fieldset class="border border-1 rounded p-5 pt-0 d-flex flex-wrap flex-column">
@@ -30,6 +31,7 @@
 import DesplegableEquipos from "@/components/DesplegableEquipos.vue";
 import DesplegableJugadores from "@/components/DesplegableJugadores.vue";
 import AlertExito from "@/components/AlertExito.vue";
+import AlertWarning from "@/components/AlertWarning.vue";
 import axios from "axios";
 
 export default {
@@ -42,13 +44,15 @@ export default {
         equipo: "",
         jugador: "",
         showAlertaExito: false,
+        showAlertaWarning: false,
         msg: ""
       }
     },
     components: {
       DesplegableEquipos,
       DesplegableJugadores,
-      AlertExito
+      AlertExito,
+      AlertWarning
     },
     methods: {
       getEquipos(URL) {
@@ -73,7 +77,11 @@ export default {
         })
         .then((response) => this.jugadores = response.data)
         .then(() => {
-          if(this.jugadores < 1) return window.alert(`No hay jugadores en ${equipo}`)
+          if(this.jugadores < 1) {
+            this.msg = `No hay jugadores en ${equipo}`;
+            this.mostrarAlertaWarning();
+          }
+          
         })
         .catch((err) => console.error(err));
       },
@@ -98,7 +106,14 @@ export default {
        var element = this.$refs[refName];
 
        window.scrollTo(0, element);
-      }
+      },
+      mostrarAlertaWarning() {
+        this.showAlertaWarning = true;
+        this.goto("#alertaWarning");
+      },
+      cerrarAlertaWarning() {
+        this.showAlertaWarning = false;
+      },
     },
     computed: {
       isDisabled() {
