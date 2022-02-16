@@ -1,20 +1,47 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Inicio',
+    component: () => import('../views/Inicio.vue')
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/clasificacion',
+    name: 'Clasificacion',
+    component: () => import('../views/Clasificacion.vue')
+  },
+  {
+    path: '/equipos',
+    name: 'Equipos',
+    component: () => import('../views/Equipos.vue')
+  },
+  {
+    path: '/jornadas',
+    name: 'Jornadas',
+    component: () => import('../views/Jornadas.vue')
+  },
+  {
+    path: '/jugadores/nuevojugador',
+    name: 'NuevoJugador',
+    component: () => import('../views/NuevoJugador.vue')
+  },
+  {
+    path: '/jugadores/eliminarjugador',
+    name: 'EliminarJugador',
+    component: () => import('../views/EliminarJugador.vue')
+  },
+  {
+    path: '/jornadas/nuevopartido',
+    name: 'NuevoPartido',
+    component: () => import('../views/NuevoPartido.vue')
+  },
+  {
+    path: '/jugadores',
+    name: 'Jugadores',
+    component: () => import('../views/Jugadores.vue')
+  },
+  
 ]
 
 const router = createRouter({
