@@ -7,7 +7,7 @@
     <h2 v-else-if="jornadas.lenth < 1" class="text-center w-100">No hay jornadas para mostrar</h2>
     <desplegable-jornadas v-else :jornadas="jornadas" @partidosJornada="getPartidosEnJornada" @mostrarJornadas="mostrarJornadas"/>
 
-    <div v-for="partido in partidosJornadaFecha" :key="partido.id">
+    <div v-for="partido in partidosJornadaFecha" :key="partido.id" class="w-100">
       <jumbotron-partido 
         v-if="partido.hasOwnProperty('score')"
         :escudos="escudos"
